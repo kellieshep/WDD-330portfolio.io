@@ -2,9 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Superhero Quiz</title>
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                // Set the questions
+                const quiz = [
+                    ["What is Superman's real name?","Clark Kent"],
+                    ["What is Wonderwoman's real name?","Dianna Prince"],
+                    ["What is Batman's real name?","Bruce Wayne"],
+                    ["What is the Hulk's real name?","Bruce Banner"]
+                ];
+
+                function start(quiz){
+                    // initialize score
+                    let score = 0;
+
+                    // main game loop
+                    for(const [question,answer] of quiz){
+                        const response = ask(question);
+                        check(response,answer);
+                    }
+                    // end of main game loop
+
+                    gameOver();
+
+                    // function declarations
+                    function ask(question){
+                        return prompt(question);
+                    }
+
+                    function check(response,answer){
+                        // check if answer is correct
+                        if(response === answer){
+                            alert('Correct!');
+                            // increase score by 1
+                            score++;
+                        } else {
+                            alert(`Wrong! The correct answer was ${answer}`);
+                        }
+                    }
+
+                    function gameOver(){
+                        // At the end of the game, report the player's score
+                        alert(`Game Over, you scored ${score} point${score !== 1 ? 's' : ''}`);
+                    }
+                }
+
+                start(quiz);
+            }, 100);
+        };
+
+    </script>
+    <style>
+        body{
+            background-color: lightskyblue;
+            color: darkblue;
+            font-family: "AvenirNext LT Pro Medium", "Neuton ExtraBold";
+        }
+        H1{
+            color: crimson;
+            font-family: Impact;
+        }
+#main{
+    background-color: aliceblue;
+}
+    </style>
 </head>
 <body>
-
+<section id="main">
+<H1>The Superhero Quiz!</H1>
+<h5>Use your brain to answer these questions about our favorite brawny characters.</h5>
+</section>
 </body>
 </html>
