@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>WDD330 | Team 4 | Week 02</title>
+    </head>
+
+    <script>
+        function addAllNumbers(){
+            const userNumber = parseInt(document.getElementById('user_number').value);
+            document.getElementById('sum').innerHTML = addThemUp(userNumber);
+        }
+        function addThemUp(num){
+            let sumTotal = num;
+            for (i=0; i < num; i++){
+                sumTotal += i;
+            }
+            return sumTotal;
+        }
+        function getNum(){
+            let numArray = [2];
+            numArray[0] = parseInt(document.getElementById('num_one').value);
+            numArray[1] = parseInt(document.getElementById('num_two').value);
+
+            return numArray;
+        }
+        function calcTwo(operator,numberList){
+        
+            let calcTotal = 0;
+            switch (operator){
+                case 1:
+                    calcTotal = numberList[0] + numberList[1];
+                    break;
+                case 2:
+                    calcTotal = numberList[0] - numberList[1];
+                    break;
+                case 3:
+                    calcTotal = numberList[0] * numberList[1];
+                    break;
+                case 4:
+                    calcTotal = numberList[0] / numberList[1];
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById('answer').innerHTML = calcTotal;
+        }
+    </script>
+
+    <body>
+        <h1>Team 4 Week 2</h1>
+        <h3>Add All Numbers</h3>
+        <input id="user_number"></input>
+        <button onclick="addAllNumbers()">Submit</button>
+        <div id="sum"></div>
+
+        <h3>Adding Machine</h3>
+        <input type="number" id="num_one"> <input id="num_two" type="number">
+        <button onclick="calcTwo(1,getNum())">+</button>
+        <button onclick="calcTwo(2,getNum())">-</button>
+        <button onclick="calcTwo(3,getNum())">x</button>
+        <button onclick="calcTwo(4,getNum())">÷</button>
+        <div style="display:inline-block;" id="answer"></div>
+    </body>
+</html>
