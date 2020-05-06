@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 3 - </title>
+</head>
+<style>
+    header{
+        background-color: darkred;
+        color: whitesmoke;
+        font-family: "Modern No. 20", serif;
+        font-size: large;
+        padding: 2em;
+        margin: auto;
+    }
+    footer{
+        background-color: darkred;
+        color: whitesmoke;
+        font-family: "Modern No. 20", serif;
+        font-size: medium;
+        padding: 2em;
+        margin: auto;
+        text-align: center;
+    }
+    a{
+
+        color: whitesmoke;
+    }
+    #line{
+        background-color: black;
+        height: .5em;
+        width: 145%;
+    }
+    #link{
+        color:crimson;
+    }
+    #chapter5, #chapter6, #chapter7{
+        padding: 3em;
+        background-color: lightgray;
+        font-family: Corbel ;
+        border: black .5em solid;
+    }
+    h2{
+        font-family: "Modern No. 20";
+    }
+</style>
+<body>
+<section>
+<header id="header"><h1>Week 3<br>Ch5: Objects<br>
+    Ch6: Document Object Model<br>
+    Ch7: Events</h1>
+<section id="line"></section>
+</header>
+<section id="chapter5"><p ><h2>Chapter 5:Objects</h2>
+    <ul><li><h3>Object literals</h3></li>
+<p>An object literal is an object that is created directly in the language by wrapping all its properties
+    and methods in curly braces {} . Object literals are a distinguishing feature of the JavaScript language,
+    as they allow objects to be created quickly without the need for defining a class. They also provide a
+    useful way of organizing your code without polluting the global namespace.</p>
+        <p>"const superman = {<br>
+            name: 'Superman',<br>
+            'real name': 'Clark Kent',<br>
+            height: 75,<br>
+            weight: 235,<br>
+            hero: true,<br>
+            villain: false,<br>
+            allies: ['Batman','Supergirl','Superboy'],<br>
+            fly() {<br>
+            return 'Up, up and away!';<br>
+            }<br>
+            };</p>
+        <li><h3>Adding properties to objects</h3></li>
+<p>New properties and methods can be added to objects at any time in a program. This is done by simply assigning
+    a value to the new property. For example, if we wanted to add a new city property to our superman object,
+    we would do it like so:</p>
+        <p>superman.city = 'Metropolis';<br>
+            << 'Metropolis'<br>Changing properties<br>superman['real name'] = 'Kal-El';<br>
+            << 'Kal-El'<br>to delete<br>delete superman.fly<br>Nesting Objects<br>const jla = {
+            superman: { realName: 'Clark Kent' },<br>
+            batman: { realName: 'Bruce Wayne' },<br>
+            wonderWoman: { realName: 'Diana Prince" },<br>
+            flash: { realName: 'Barry Allen' },<br>
+            aquaman: { realName: 'Arthur Curry' },<br>
+            }
+        </p>
+        <li><h3>Object methods</h3> </li>
+<p> An object literal can be passed as a parameter to a function. This is useful
+    when there are a large number of parameters, as it allows the arguments to be
+    provided by name and in any order. This means you don't have to remember the
+    order to enter them when invoking a function. Using a function called greet() . This accepts three parameters:<br>
+    function greet({greeting,name,age}) {<br>
+    return `${greeting}! My name is ${name} and I am ${age} years old.`;<br>
+    }<br>To demonstrate using <em>this</em> , we'll create a dice object that has a sides property and a roll() method that returns a number between 1 and the number of sides.
+
+    Here’s the code to create our dice object:<br>
+
+    const dice = {<br>
+    sides: 6,<br>
+    roll() {
+    return Math.floor(this.sides * Math.random()) + 1;<br>
+    }<br>
+    }</p>
+        <li><h3>JSON</h3> </li>
+<p>JavaScript Object Notation, or JSON, was invented by Douglas Crockford in 2001. It is an extremely popular lightweight data-storage format that is used by a large number of services for data serialization and configuration. It is often used to exchange information between web services, and is employed by sites such as Twitter, Facebook and Trello to share information. The beauty of JSON is that it manages to hit the sweet spot between being both human- and machine-readable.
+
+    JSON is a string representation of the object literal notation that we have just seen. There are, however, a couple of key differences:
+
+        <ol> <li>Property names must be double-quoted</li>
+            <li>Permitted values are double-quoted strings, numbers, true, false, null, arrays and objects</li>
+            <li>Functions are not permitted values</li></ol>
+        The parse() method takes a string of data in JSON format and returns a JavaScript object:<br>
+
+        JSON.parse(batman);<br>
+        << { name: 'Batman',<br>
+        'real name': 'Bruce Wayne',<br>
+        height: 74,<br>
+        weight: 210,<br>
+        hero: true,<br>
+        villain: false,<br>
+        allies: [ 'Robin', 'Batgirl', 'Superman' ] }<br>The stringify() method does the opposite, taking a JavaScript object and returning a string of JSON data</p>
+        <li> <h3>The Math object</h3> </li>
+<p>The Math object is a built-in object that has several properties representing mathematical constants, as well as methods that carry out a number of common mathematical operations.
+
+    <br>All the properties and methods of the Math object are immutable and unable to be changed.<br>The Math object has eight properties that represent a mix of commonly used math constants. Note that they are all named in capital letters, as is the convention for constant values:
+
+    <br>Math.PI // The ratio of the circumference and diameter of a circle<br>
+    << 3.141592653589793<br>
+    Math.SQRT2 // The square root of 2<br>
+    << 1.4142135623730951<br>
+    Math.SQRT1_2 // The reciprocal of the square root of 2<br>
+    << 0.7071067811865476<br>
+    Math.E // Euler's constant<br>
+    << 2.718281828459045<br>
+    Math.LN2 // The natural logarithm of 2<br>
+    << 0.6931471805599453<br>
+    Math.LN10 // The natural logarithm of 10<br>
+    << 2.302585092994046<br>
+    Math.LOG2E // Log base 2 of Euler's constant<br>
+    << 1.4426950408889634<br>
+    Math.LOG10E // Log base 10 of Euler's constant<br>
+    << 0.4342944819032518<br>The Math.abs() method returns the absolute value of a number. So if the number is positive, it will remain the same, and if it’s negative, it will become positive:
+    <br>The Math.ceil() method will round a numberupto the next integer, or remain the same if it is already an integer:<br>
+    The Math.floor() method will round a numberdownto the next integer, or remain the same if it is already an integer:<br>
+    The Math.round() method will round a number to the nearest integer:<br>
+    ES6 also introduced the Math.trunc() method that returns the integer-part of a number – that is, it gets truncated at the decimal point:<br>
+    The Math.exp() method will raise a number to the power of Euler’s constant:<br>
+    The Math.pow() method will raise any number (the first argument) to the power of another number (the second argument):<br>
+    The Math.sqrt() method returns the positive square root of a number:<br>
+    The Math.cbrt() method was introduced in ES6, which returns the cube root of numbers:<br>
+    The Math.hypot() method was also introduced in ES6. It returns the square root of the sum of the squares of all its arguments. This can be used to calculate the hypotenuse of a right-angled triangle:<br>
+    The Math.log() method returns the natural logarithm of a number:<br>
+    The Math.max() method returns the maximum number from its arguments:<br>
+    And the Math.min() method unsurprisingly returns the minimum number from the given arguments:<br>
+    The Math.random() method is used to create random numbers, which can be very useful when writing programs. Calling the method will generate a number between 0 (inclusive) and 1 (exclusive)<br>
+
+</p>
+        <li><h3>The Date object</h3> </li>
+        <p>A constructor function is used to create a new date object using the new operator:<br>
+
+            const today = new Date();<br>
+            The variable today now points to a Date object. To see what the date is, we use the toString() method that all objects have:<br>
+
+            today.toString();<br>
+            << 'Tue Feb 14 2017 16:35:18 GMT+0000 (GMT)'<br></p>
+
+        <li><h3>The RegExp object</h3> </li>
+        <p>A regular expression (or RegExp, for short) is a pattern that can be used to search strings for matches to the pattern. A common use is 'find and replace' type operations. For example, say you were looking for any word ending in 'ing', you could use the regular expression /[a-zA-Z]+ing$/ .</p>
+    <br><ul><li>. matches any character, except line breaks</li>
+
+            <li>\w matches any word character, and is equivalent to [A-Za-z0-9_]</li>
+
+            <li> \W matches any non-word character, and is equivalent to [\^A-Za-z0-9_]</li>
+
+            <li>\d matches any digit character, and is equivalent to [0-9]</li>
+
+            <li>\D matches any non-digit character, and is equivalent to [^0-9]</li>
+
+            <li>\s matches any whitespace character, and is equivalent to [ \t\r\n\f]</li></ul>
+    </ul>
+            Modifiers
+    <ul>    <li>? makes the preceding token in the regular expression optional</li>
+
+            <li>* matches one or more occurrences of the preceding token</li>
+
+           <li> + matches one or more occurrences of the preceding token</li>
+
+           <li>{n} matchesnoccurrences of the preceding token</li>
+
+            <li>{n,} matches at leastnoccurrences of the pattern</li>
+
+             <li>{,m} matches at mostmoccurrences of the preceding token</li>
+
+            <li>{n,m} matches at leastnand at mostmoccurrences of the preceding token</li>
+
+            <li>^ marks the position immediately before the first character in the string</li>
+
+            <li>$ marks the position immediately after the last character in the string</li></ul>
+
+</section>
+<section id="chapter6"
+<h2>Chapter 6: Document Object Model</h2>
+<p>
+    There are some methods from DOM Level 0 that can still be employed to access commonly used elements. These include:
+
+<ul><li>Document.body returns the body element of a web page.</li>
+
+    <li> Document.images returns a node list of all the images contained in the document.</li>
+
+    <li>Document.links returns a node list of all the &lt a &gt elements and &lt area &gt elements that have an href attribute.</li>
+
+    <li>Document.anchors returns a node list of all the &lt a &gt elements that have a name attribute.</li>
+
+    <li>Document.forms returns a node list of all the forms in the document.</li></ul>
+    The getElementById() method does exactly what it says on the tin. It returns a reference to the element with a unique id attribute that is given as an argument. For example, we can get a reference to the &lt h1 &gt heading element with the id of 'title' in the 'heroes.html' page by writing this in the console:<br>
+
+    const h1 = document.getElementById('title');<br>
+    getElementsByTagName() will return a live node list of all the elements with the tag name that is provided as an argument. For example, we can get all the list items (HTML tag of &lt li> &gt ) in the document using this code:
+
+    <br> const listItems = document.getElementsByTagName('li');<br>getElementsByClassName() will return a live node list of all elements that have the class name that is supplied as an argument.<br>
+    The document.querySelector() method allows you to use CSS notation to find thefirstelement in the document that matches that matches a CSS selector provided as an argument. If no elements match, it will return null .
+
+    The document.querySelectorAll() method also uses CSS notation but returns a node list ofallthe elements in the document that match the CSS query selector. If no elements match, it will return an empty node list.<br>
+    The childNodes property is a list of all the nodes that are children of the node concerned.<br>The firstChild property returns the first child of a node:<br>
+    And the lastChild property returns the last child of a node:<br>The parentNode property returns the parent node of an element.<br>
+    The nextSibling property returns the next adjacent node of the same parent. It will return null if the node is the last child node of that parent:<br>
+    The previousSibling property returns the previous adjacent node. It will return null if the node is the first child of that parent:<br>
+    The getAttribute() method returns the value of the attribute provided as an argument:<br>
+    The setAttribute can change the value of an element’s attributes. It takes two arguments: the attribute that you wish to change, and the new value of that attribute.<br>
+    If an element does not have an attribute, the setAttribute method can be used to add it to the element.<br>
+    There is also a className property that allows the class of an element to be set directly. In addition, it can be used to find out the value of the class attribute:<br>
+    The classList property is a list of all the classes an element has. It has a number of methods that make it easier to modify the class of an element. It’s supported in all modern browsers and in Internet Explorer from version 10 onwards.
+    <br>The add method can be used to add a class to an element without overwriting any classes that already exist.<br>
+    The remove method will remove a specific class from an element.<br>
+    The toggle method is a particularly useful method that will add a class if an element doesn’t have it already, and remove the class if it does have it.<br>
+    The document object has a <em>createElement()</em> method that takes a tag name as a parameter and returns that element.<br>
+    A text node can be created using the<em>document.createTextNode()</em>  method. It takes a parameter, which is a string containing the text that goes in the node.<br>
+    Every node object has an appendChild() method that will add another node (given as an argument) as a child node. We want our newly created text node to be a child node of the list element node.<br>
+    The appendChild() and insertBefore() methods can be used to move markup that already exists in the DOM as well. This is because a reference to a single DOM element can only exist once in the page, so if you use multiple inserts and appends, only the last one will have an effect. If an element is required to appear in several different places in the document, it would need to be cloned before each insertion.<br>
+    An element can be removed from a page using the removeChild() method. This method is called on the parent node and has a single parameter, which is the node to be removed. It returns a reference to the removed node.<br>
+</section>
+    <section id="chapter7">
+<h2>Chapter 7: Events</h2>
+        <h5><a id="link" href="https://eloquentjavascript.net/code/#15.1">This is an example of an event listener- use the arrow up and down keys to see what happens to the balloon.<br> Click on <em>[look at the solution]</em> and then <em>[run code]</em>.</a></h5>
+
+    </section>
+<footer>
+    <h4><a href="index.html">Link to Home Page</a></h4>
+    <h3>	&copy; 2020 Kellie Shepherd - WDD-330</h3>
+</footer>
+</body>
+</html>
