@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 4 - </title>
+</head>
+<style>
+    header{
+        background-color: darkred;
+        color: whitesmoke;
+        font-family: "Modern No. 20", serif;
+        font-size: large;
+        padding: 2em;
+        margin: auto;
+    }
+    footer{
+        background-color: darkred;
+        color: whitesmoke;
+        font-family: "Modern No. 20", serif;
+        font-size: medium;
+        padding: 2em;
+        margin: auto;
+        text-align: center;
+    }
+    a{
+
+        color: whitesmoke;
+    }
+    #line{
+        background-color: black;
+        height: .5em;
+        width: 145%;
+    }
+    #link{
+        color:crimson;
+    }
+    #chapter5, #chapter6, #chapter7{
+        padding: 3em;
+        background-color: lightgray;
+        font-family: Corbel ;
+        border: black .5em solid;
+    }
+    h2{
+        font-family: "Modern No. 20";
+    }
+    .error{
+        background: #f99;
+        border: #900 1px solid;
+        display: none;
+    }
+    form{
+        width: 30%;
+    }
+</style>
+<body>
+<section>
+    <header id="header"><h1>Week 4<br>Ch8: Forms<br>
+        Ch12: Object Oriented Programming<br>
+        Ch15: Modern Javascript</h1>
+        <section id="line"></section>
+    </header>
+    <main>
+        <section id="chapter8">
+<h2>Forms</h2>
+            <p>
+                Forms are made up of a &lt form &gt element that contains form controls such as input
+            fields, select menus and buttons. These input fields can be populated with
+            information that is processed once the form has been submitted.<br>
+            Traditionally, when a form was submitted, it would be sent to a server where the
+            information would be processed using a back end language such as PHP or Ruby.
+            It’s possible, and becoming more and more common, to process the information
+            in a form on the front end before it is sent to the server using JavaScript.<br>
+                You should also create a file called main.js to put the JavaScript in. This can be
+                saved in the same directory as search.html.
+            </p>
+            <p>
+                The legacy DOM had a useful property called <em>document.forms</em> that returns an
+                HTML collection of all the forms in the document in the order they appear in the
+                markup.
+                A form object also has a method called elements that returns an HTML collection
+                of all the elements contained in the form. In this case the form contains two
+                controls: an input element and a button element:<br>
+                const [input,button] = form.elements;<br>
+                We can also access the form controls using their name attributes as if it was a
+                property of the form object. So, for example, the input field has a name attribute
+                of searchInput and can be accessed using this code:<br>
+                const input = form.searchInput<br>
+                The square bracket notation can also be used instead (again, this is useful if there
+                are any naming clashes with existing property and method names, or if the name
+                is an invalid variable name):<br>
+                const input = form['searchInput']<br>
+                The form.submit() method will submit the form automatically. Note that
+                submitting a form using this method won’t trigger the form submit event that’s
+                covered in the next section.<br>
+                A form can be submitted manually by the user employing a button or input
+                element with a type attribute of submit, or even an input element with a type
+                attribute of image:<br>
+                &lt button type='submit' &gl Submit &lt /button &gt<br>
+                &lt input type='submit' value='Submit'&gt<br>
+                &lt input type='image' src='button.png'&gt<br>
+                The form.reset() method will reset all the form controls back to their initial
+                values specified in the HTML.
+                A button with a type attribute of reset can also be used to do this without the
+                need for additional scripting:
+            </p>
+            <p>
+                Form controls: <br>
+                &lt input &gt fields, including text, passwords, check boxes, radio buttons, and file
+                uploads<br>
+                &lt select &gt menus for drop-down lists of options<br>
+                &lt textarea &gt elements for longer text entry<br>
+                &lt button &gt elements for submitting and resetting forms<br>
+            </p>
+            <form id='hero'>
+                <label for='heroName'>Name:
+                    <input type='text' id='heroName' name='heroName' autofocus placeholder='Your Super Hero Name' maxlength=32>
+                    <label for='realName' maxlength="32" required>Real Name:
+                        <input type='password' name='realName' id='realName'></label>
+                </label>
+                <p>Super Powers:</p>
+                <label for='flight'>Flight:
+                    <input type='checkbox' id='flight' value='Flight' name='powers'>
+                </label>
+                <label for='strength'>Super Strength:
+                    <input type='checkbox' id='strength' value='Strength' name='powers'>
+                </label>
+                <label for='speed'>Super Speed:
+                    <input type='checkbox' id='speed' value='Super Speed' name='powers'>
+                </label>
+                <label for='energy'>Energy Blasts:
+                    <input type='checkbox' id='energy' value='Energy Blasts' name='powers'>
+                </label>
+                <label for='telekinesis'>Telekinesis:
+                    <input type='checkbox' id='telekinesis'
+                           ➥ value='Telekinesis' name='powers'>
+                </label>
+                <p>What type of hero are you?</p>
+                <label for='heros'>Hero:
+                    <input type='radio' name='category' value='Hero'
+                           id='heros'>
+                </label>
+                <label for='villain'>Villain:
+                    <input type='radio' name='category' value='Villain'
+                           id='villain'>
+                </label>
+                <label for='anti-hero'>Anti-Hero:
+                    <input type='radio' name='category' value='Antihero'
+                           id='anti-hero'>
+                </label>
+                <label for='age'>Age:
+                    <input type='number' id='age' name='age' min=0
+                           step=1></label>
+                <label for='City'>Base of Operations:
+                    <select name='city' id='city'>
+                        <option value='' selected>Choose a City</option>
+                        <option value='Metropolis'>Metropolis</option>
+                        <option value='Gotham City'>Gotham City</option>
+                        <option value='Keystone City'>Keystone City</option>
+                        <option value='Coast City'>Coast City</option>
+                        <option value='Star City'>Star City</option>
+                    </select>
+                </label>
+                <textarea name='origin' rows='20' cols='60'>Born as Kal-El on the planet Krypton...</textarea>
+                <button type='submit'>Submit</button>
+                <form id='response'>
+                    <input name='answer' type='text'>
+                    <button type='submit'>Submit Answer</button>
+                </form>
+            </form>
+            <script src='main.js'></script>
+            <p>The default type of input field is text, which is used for entering a short piece of
+                text, such as a username.<br>
+                input type='password' is used to enter passwords or secret information. This
+                works in the same way as an input field with type='text', except the characters
+                are concealed as they are entered so they’re unable to be read on the screen.<br>
+                Check boxes are created using input fields with type='checkbox'. They are used
+                to select different options that can be checked (true) or left unchecked (false). The
+                user can select more than one checkbox from a list.<br>
+                Form validation is the process of checking whether a user has entered the
+                information into a form correctly. Examples of the types of validation that occur
+                include ensuring that:<br>
+                A required field is completed<br>
+                An email address is valid<br>
+                A number is entered when numerical data is required<br>
+                A password is at least a minimum number of characters<br>
+                Validation can occur on the client side using JavaScript, and on the server side. It
+                is advisable to use both client-side and server-side validation.<br>
+                A submit button can be disable by added the disabled attribute to the &lt input &gt
+                element:
+            </p>
+        </section>
+        <section id="Chapter12">
+            <h2>Object Oriented Programming</h2>
+<p>An introduction to OOP<br>Object-oriented programming is often used to model representations of objects in
+    the real world. There are three main concepts in OOP: encapsulation,
+    polymorphism and inheritance.
+    <br>Constructor functions<br>JavaScript contains a number of built-in constructor functions such as Object,
+    Array, and Function that can be used to create objects, arrays and functions
+    instead of literals.
+    The easiest way to create a new object is to use the literal syntax:It is also possible to use the Object constructor function:A literal is still considered to be an instance of the Object constructor:Similarly, the easiest way to create an array is to use the literal syntax,But an alternative is to use the Array constructor function
+    Array constructor functions exhibit some strange behavior regarding the arguments
+    supplied, however. If only one argument is given, it doesn’t create an array with
+    that argument as the first element, as you might expect. It sets the array’s length
+    property instead, and returns an array full of undefined!<br>
+    Array constructor functions exhibit some strange behavior regarding the arguments
+    supplied, however. If only one argument is given, it doesn’t create an array with
+    that argument as the first element, as you might expect. It sets the array’s length
+    property instead, and returns an array full of undefined!<br>
+    Using classes in JavaScript<br>
+    <br>Prototypes<br>
+    JavaScript uses a prototypal inheritance model. This means that every class has a
+    prototype property that is shared by every instance of the class. So any propertiesor methods of a class’s prototype can be accessed by every object instantiated by
+    that class.<br>There are a number of ways to find the prototype of an object. One way is to go
+    via the constructor function’s prototype property:<br>Another way is to use the Object.getPrototypeOf() method, which takes the
+    object as a parameter:<br>Many JavaScript engines also support the non-standard __proto__ property. This
+    is known as dunder proto, which is short for “double underscore proto”:<br>Every object also has a isPrototypeOf() method that returns a boolean to check
+    if it’s the prototype of an instance:<br>Every object has a hasOwnProperty() method that
+    can be used to check if a method is its own property, or is inherited from the
+    prototype:<br>The prototype can be used to add any new properties and methods after the class
+    has been declared. It should be used to define any properties that will remain the
+    same for every instance of the class.
+    <br>Public and private methods<br>By default, an object’s methods are public in JavaScript. Methods and properties
+    are said to be public because they can be queried directly and changed by
+    assignment. The dynamic nature of the language means that an object’s properties
+    and methods can be changed after it has been created.<br>Fortunately, we can use the concept of variable scope to keep some properties
+    and methods private inside of a class declaration. This will prevent them from
+    being accessed or changed. Instead, we will provide a getter method to return the
+    values of any private properties.<br>The _color property is created as a variable inside the scope of the constructor
+    function inside the class declaration. This makes it impossible to access outside
+    of this scope. The getColor() and setColor() methods are known as getter and
+    setter methods and they form a closure over this variable and provide controlled access to the property instead:
+    <br>Inheritance<br>
+    The examples we’ve seen so far have all demonstrated inheritance by inheriting
+    properties and methods from the prototype. But the prototype is just another
+    object, so it also has its own prototype, which in turn has its own prototype... and
+    so on, creating a chain of inheritance.
+    The Prototype Chain
+    We can see an example of a prototype chain by looking at the prototype of the
+    ralph instance of the Turtle class that we created in the last section, using the
+    Object.getPrototypeOf() method:
+    <br>Creating objects from objects<br>
+    When an object calls a method, the JavaScript engine will check to see if the
+    object has that method. If it doesn’t, it will check if the object’s prototype has the
+    method. If not, it will check whether the prototype’s prototype has it. This
+    continues all the way up the prototype chain, until it reaches the prototype of the
+    Object() constructor function, from which all objects in JavaScript inherit. If the
+    prototype of Object() is without the method, an error will be returned saying the
+    object doesn’t exist:<br>The prototype of the Object constructor function has a large number of methods
+    that are inherited by all objects. The reason why the prototype appears as an
+    empty object literal is because all of its methods are not enumerable.
+    <br>Adding methods to built-in objects<br>Properties of objects in JavaScript are said to be enumerable or non-enumerable.
+    If they aren’t enumerable, this means they will not show up when a for-in loop
+    is used to loop through an object’s properties and methods.
+    There is a method called propertyIsEnumerable() that every object has (because
+    it’s a method of Object.prototype) that can be used to check if a property is
+    enumerable. We can see in the following example that the eat() method we
+    created earlier is enumerable (in fact, all properties and methods that are created
+    by assignment are enumerable):All objects inherit a toString() method from Object.prototype, but it’s not
+    enumerable, so it won’t show up in any objects:In fact, the propertyIsEnumerable() method can be used to show that it isn’t,
+    itself, enumerable:<br>A class can inherit from another class using the extends keyword in a class
+    declaration.<br>The concept of polymorphism means that different objects can have the same
+    method, but implement it in different ways. The Object.prototype object has a
+    toString() method that is shared by all objects. This means every object created
+    in JavaScript will have a toString() method. Polymorphism means that objects
+    are able to override this method with a more specific implementation. So
+    although every object has a toString() method, the way it’s implemented can
+    vary between different objects. For example, calling it on an array object will
+    return each value in a comma-separated string:<br>The toString() method is used by a number of built-in functions in the
+    background. It can be used without fear of causing an error because every object
+    has the method, as it’s inherited from Object.prototype.<br> Properties Attributes and Descriptors<br>
+    All object properties have the following attributes stored in a property descriptor:<br>
+    value ― This is the value of the property and is undefined by default<br>
+    writable ― This boolean value shows whether a property can be changed or
+    not, and is false by default<br>
+    enumerable ― this boolean value shows whether a property will show up
+    when the object is displayed in a for in loop, and is false by default<br>
+    configurable ― this boolean value shows whether you can delete a property
+    or change any of its attributes, and is false by default.<br>It’s possible to avoid using classes altogether, and create new objects based on
+    another object that acts as a blueprint or prototype instead.
+    The Object() constructor function has a method called create that can be used
+    to create a new object that is an exact copy of the object that is provided as an
+    argument. The object that is provided as the argument acts as the prototype for
+    the new object.
+    For example, we can create a Human object that will form the basis for other Human
+    objects. This is simply created as an object literal
+    <br>Mixins<br>
+    A mixin is a way of adding properties and methods of some objects to another
+    object without using inheritance. It allows more complex objects to be created by
+    ‘mixing’ basic objects together.
+    Basic mixin functionality is provided by the Object.assign() method. This will
+    assign to the object provided as the first argument all of the properties from any objects provided as further arguments:
+    <br>To avoid only a shallow copy, we’re going to create our own mixin() function
+    that will assign all properties of an object to another object as a deep copy.
+    This means that every object will inherit this method and be able to use it to
+    augment itself with the properties and methods from other objects.<br>One use for the mixin() function is to add a large number of properties to an
+    object all at once. Another use of the mixin() function is to create a copy() method that can be
+    used to make an exact, deep copy of an object<br>The mixin() function is then used to add all the properties and methods of the
+    object to this new object, effectively making an exact copy of itself.<br>A factory function is a function that can be used to return an object.
+    <br>Inheritance allows us to add functionality to objects by inheriting properties and
+    methods from other objects. While this is useful, it can be undesirable to create a
+    chain of inheritance ― sometimes we just want to add properties and methods
+    without linking the two objects together. The mixin() function lets us
+    encapsulate properties and methods in an object, then add them to other objects
+    without the overhead of an inheritance chain being created.
+    One way to think about the difference between prototypal inheritance and
+    inheritance from mixin objects is to consider whether an object is something or
+    whether it has something. For example, a tank is a vehicle, so it might inherit
+    from a Vehicle prototype. The tank also has a gun, so this functionality could be
+    added using a gun mixin object. This gives us extra flexibility, since other objects
+    might also use a gun, but not be a vehicle, such as a soldier object, for example.
+    The soldier object might inherit from a Human prototype and also have the gun
+    mixin.
+    <br>Chaining functions<br>
+    If a method returns this, its methods can be chained together to form a sequence
+    of method calls that are called one after the other.<br>A big drawback with this technique is that it can make code more difficult to
+    debug. If an error is reported as occurring on a particular line, there is no way of
+    knowing which method caused the error, since there are multiple method calls on
+    that line.
+    It’s worth keeping in mind that if a method lacks a meaningful return value, it
+    might as well return this so that chaining is possible.
+    <br>This and that<br>We saw earlier that the value of this points to the object calling a method. It
+    allows us to create generalized methods that refer to properties specific to a
+    particular object. Be aware of a certain problem when a function is nested inside
+    another function, which can often happen when using methods in objects,
+    especially ones that accept callback functions. The problem is that the value of
+    this loses its scope, and points to the global object inside a nested function
+   <br>A common solution is to set the variable that to equal this before the nested
+    function, and refer to that in the nested function instead of this<br>The bind() method is a method for all functions and is used to set the value of
+    this in the function. If this is provided as an argument to bind() while it’s still
+    in scope, any reference to this inside the nested function will be bound to the
+    object calling the original method
+    <br>Borrowing methods from prototypes<br>
+    It’s possible to borrow methods from objects without having to inherit all their
+    properties and methods. This is done by making a reference to the function that
+    you want to borrow (that is, without parentheses so that it isn’t invoked).<br>One of the most common uses of borrowing methods was to borrow methods
+    from arrays in ES5. There are many array-like objects in JavaScript, such as the
+    arguments object that’s available in functions, and the node lists that many of the
+    DOM methods return. These act like arrays but are missing a lot of the methods
+    arrays have — often it would be convenient if they had them.
+    For example, the arguments object can use the slice() method from the Array
+    constructor’s prototype by assigning a variable that points to it:<br>This method can then be called on the arguments object using the call()
+    method:<br>The call() method takes the object that the function is to be applied to as its first
+    argument, then the usual arguments come afterwards.<br>An array-like object can effectively be turned into an array using the slice()
+    method with no arguments:
+        </section>
+        <section id="chapter15">
+           <h3> Libraries</h3>
+           <p> A JavaScript library is a piece of code that provides several methods that make it
+            easier to achieve common tasks. JavaScript is an extremely flexible language that
+            can accomplish most programming tasks – but not all undertakings are as easy to
+            do as they should be. A library will abstract functionality into easier-to-use
+            functions and methods. These can then be used to complete common tasks
+            without having to use lots of repetitive code.<br>
+               A good example of how libraries can help save time is in DOM manipulation. The
+               DOM API provides all the tools required to manipulate the DOM, but some can be
+               verbose and take several lines of code to attain even the most basic of tasks.
+               For example, if we wanted to add a class to a paragraph element referenced by
+               the variable para, then append another paragraph on the end, we could do it
+               using the following:<br>
+               para.classList.add('important');
+               const newPara = document.createElement('p');<br>
+               Yet by using the jQuery library, we can achieve the same result using a single line
+               of code:<br>
+               $(para).addClass('important').append('<p>Another
+              Paragraph</p>');<br>
+            This shows how using a library can reduce the amount of code you have to write, as well as making
+            common tasks easier to implement. Popular libraries such as jQuery are often well-tested, and help
+            to iron out edge cases and bugs in older browsers that would be difficult to do with your own code.
+            They also unify a number of implementations of the same feature that are different across different
+            browsers. For example, adding event listeners uses a different syntax in some older browsers, but
+            you can use a single method in jQuery that will select the implementation depending on the browser.
+            jQuery<br>
+            jQuery is the most popular of all the JavaScript libraries used today. It is used in a huge number
+            of commercial websites and has a plugin system that makes it easy to extend and use to build common
+            web page elements, such as a lightbox or
+            carousel widget.<br>A big advantage of utilizing a popular library is that it will be used by lots of
+            people and thoroughly tested. It will most likely have been optimized and battletested
+            for nearly every eventuality. Using a library means you can be confident
+            that your code will be as bullet-proof as possible in many browsers. In addition,
+            there will usually be lots of online documentation and a strong community ready
+            to help out if you become stuck. The popularity of libraries often means that
+            others will have encountered the same problem as you, often making it easy to
+            find a solution by searching on the internet.
+            There are some disadvantages to using libraries, however. You need to include
+            the code for the library as well as your own code. This increases the amount of
+            code that needs to be downloaded by a website, which in some cases can cause
+            performance issues. Thankfully, most modern libraries are relatively small once
+            server-side optimizations are made (such as gzip compression), minimizing any
+            latency issues. Another problem with libraries is that they might fail to
+            implement the functionality in the precise way that you want it to perform. This
+            might not be a problem, but sometimes you’ll have to get your hands dirty and
+            write your own functions in order to achieve the functionality for which you are
+            looking. Using a library can also make your code slower than using plain vanilla
+            JavaScript. This is because there are often more lines of code in using the
+            abstracted functions in a library rather than writing a direct implementation in
+            just JavaScript, which is “closer to the metal”, so to speak. These speed
+            differences can be barely noticeable, although there are occasions when using a
+            library is a poor choice for some operations. Using plain JavaScript can be
+            significantly faster than a library5.<br>
+            Modular Javascript<br>A module is a self-contained piece of code that provides functions and methods
+            that can then be used in other files and by other modules. This helps to keep code
+            organized in separate, reusable files, which improves code maintainability. The
+            code in a module should have a single purpose, and group together functions
+            with distinct functionality. For example, you might keep any functions used for
+            Ajax in their own module. This could then be used in any projects where Ajax
+            was required. Keeping code modular helps to make it more loosely coupled and
+            interchangeable, meaning you can easily swap one module for another without
+            affecting other parts of a project. Indeed, small single-purpose modules are the
+            exact opposite of large monolithic libraries as they enable developers to use only
+            the modules that are needed, avoiding any wasted code. Modules also allow a
+            public API to be exposed, while keeping the implementation hidden away inside
+            the module.
+            <br>ES6 Modules<br>For a long time, JavaScript didn’t support modules, but native support for them
+            was finally added in ES6. They allow you to keep parts of code in self-contained
+            files.<br>
+            There are a few important points about modules that are worth keeping in mind:<br>
+            All code in modules is always in strict mode without the need for 'use
+            strict' and there is no way to opt out of this.<br>
+            A module has its own global scope, so any variables created in the top-level of
+            a module can only be accessed within that module.<br>
+            The value of this in the top level of a module is undefined, rather than the
+            global object.<br>
+            You can’t use HTML-style comments in modules (although this isn’t very
+            common in any JavaScript program these days).<br>
+            MVC Frameworks<br>
+            Model-View-Controller (MVC) is a design pattern that’s been used for a long time
+            in server-side languages. It’s a common way of designing software, and used by
+            server-side frameworks such as Ruby On Rails and Django. In recent years it has
+            been used in JavaScript code to make it easier to organize large-scale web
+            applications.<br>
+            MVC separates an application into three distinct, independent components that
+            interact with each other:<br>
+            Models are objects that implement the functionality for creating, reading,
+            updating and deleting (known as CRUD tasks) specific pieces of information
+            about the application, as well as any other associated logic and behavior. In a
+            to-do list application, for example, there would be a task model providing
+            methods to access all the information about the tasks such as names, due dates
+            and completed tasks. This data will often be stored in a database or some
+            other container.<br>
+            Views provide a visual representation of the model showing all the relevant
+            information. In a web application, this would be the HTML displayed on a
+            web page. Views also provide a way for users to interact with an application,
+            usually via forms. In a to-do list application, the views would display the
+            tasks as an HTML list with checkboxes that a user could tick to say a task had
+            been completed.<br>
+            Controllers link models and views together by communicating between them.
+            They respond to events, which are usually inputs from a user (entering some
+            data into a form, for example), process the information, then update the model
+            and view accordingly. In a to-do list application, the controller functions
+            would respond to the event of a user clicking on a check box and then inform
+            the model that a task had been completed. The model would then update the
+            information about that task.<br>Deploying JavaScript<br>
+            When it comes to deploying your JavaScript program, it’s time to think about
+            optimizing the code. If you’ve used multiple external libraries and lots of
+            modules, you might have a large number of files that need to be included in your
+            HTML file. One way of doing this is to simply include a different &lt script &gt tag for
+            each JavaScript file. However, this is not optimal for a number of reasons:<br>
+            The scripts must be included in the correct order.<br>
+            Each file represents a separate request to the server.<br>
+            The files will be large.<br>
+            The solution is to combine all the scripts into a single minified and compressed
+        file. This file is often named bundle.min.js to signify that it’s a number of files
+            bundled together and has also been minified. Once you’ve combined all the files
+            into a single file, and minified and compressed it, the next step is to add it to the
+            HTML file. The optimal position for the &lt script &gt tag is right at the end of the
+        page, just before the closing &lt body&gt tag, which we have used in all our examples:
+            This will ensure the page has finished loading before the JavaScript code is
+            processed.<br>
+            Minification<br>
+            Minification is the process of removing any unnecessary characters from your
+            code to reduce the file size. This includes all comments, whitespace, and other
+            characters that are superfluous.<br>
+            Tools are available to do this, known as minifiers. Some popular choices include:<br>
+            YUI Compressor28<br>
+            Google’s Closure29<br>
+            UglifyJS30<br>
+            These tools can also change variable and function names to single letters. This is
+            often referred to as code obfuscation as it can make the code more difficult to
+            read. They will also try to employ optimizations to make the code run faster. For
+            example, here is the myMaths object that we created at the start of this chapter
+            after it has been converted to ES5 and then minified using UglifyJS:<br>Minifying your code can have a major effect on the overall size of your files,
+            making them download and run faster. It also means that your code can use
+            descriptive naming conventions and be well-commented, as these will be
+            stripped away by the minifier tools. As a general rule, you should aim to use
+            well-commented and descriptive code in development and minified code in
+            production (since there’s no need for end users to read comments).<br>
+            Files can also be compressed on the server using a file-compression tool such as
+            gzip, which can have a dramatic effect reducing the file size. Using both
+            minification and compression in production means that JavaScript files are a
+            mere fraction of their original size, making them much quicker to download.<br>
+            </p>
+        </section>
+    </main>
+<footer>
+    <h4><a href="index.html">Link to Home Page</a></h4>
+    <h3>	&copy; 2020 Kellie Shepherd - WDD-330</h3>
+</footer>
+</body>
+</html>
