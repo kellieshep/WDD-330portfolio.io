@@ -1,0 +1,46 @@
+header{
+    background-color: darkred;
+    color: whitesmoke;
+    font-family: "Modern No. 20", serif;
+    font-size: large;
+    padding: 2em;
+    margin: auto;
+}
+footer{
+    background-color: darkred;
+    color: whitesmoke;
+    font-family: "Modern No. 20", serif;
+    font-size: medium;
+    padding: 2em;
+    margin: auto;
+    text-align: center;
+}
+a{
+
+    color: whitesmoke;
+}
+#line{
+    background-color: black;
+    height: .5em;
+    width: 145%;
+}
+#link{
+    color:crimson;
+}
+#chapter5, #chapter6, #chapter7{
+    padding: 3em;
+    background-color: lightgray;
+    font-family: Corbel ;
+    border: black .5em solid;
+}
+h2{
+    font-family: "Modern No. 20";
+}
+.error{
+    background: #f99;
+    border: #900 1px solid;
+    display: none;
+}
+form{
+    width: 30%;
+}

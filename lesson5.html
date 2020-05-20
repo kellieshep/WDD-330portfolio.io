@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 5: Notes</title>
+    <link rel="stylesheet" href="./stylesheets/styles.css" />
+</head>
+<body>
+<header id="header"><h1>Week 5<br>
+    Ch10: Testing and Debugging<br></h1>
+    <section id="line"></section>
+</header>
+<h2>Testing and Debugging</h2>
+
+<h3>Errors, exceptions, and warnings</h3>
+<p>System error ― there’s a problem with the system or external devices with which the program is interacting.<br>
+
+    Programmer error ― the program contains incorrect syntax or faulty logic; it could even be as simple as a typo.<br>
+
+    User error ― the user has entered data incorrectly, which the program is unable to handle.<br>
+
+</p>
+<p>An exception is an error that produces a return value that can then be used by the program to deal with the error. For example, trying to call a method that is nonexistent will result in a reference error that raises an exception</p>
+<h4>Stack Traces</h4><p>An exception will also produce astack trace. This is a sequence of functions or method calls that lead to the point where the error occurred. It’s often not just a single function or method call that causes an error. A stack trace will work backwards from the point at which the error occurred to identify the original function or method that started the sequence. </p>
+<h4>Warnings</h4><br><p>
+A warning can occur if there’s an error in the code that isn't enough to cause the program to crash. This means the program will continue to run after a warning. This might sound good, but it can be problematic, since the issue that produced the warning may cause the program to continue running incorrectly.
+
+An example of a mistake that could cause a warning is assigning a value to a variable that’s undeclared:<br>When a runtime error occurs in the browser, the HTML will still appear, but the JavaScript code will stop working in the background, which isn’t always obvious at first. If a warning occurs, the JavaScript will continue to run (although possibly incorrectly).</p>
+
+<h3>The importance of testing and debugging</h3>
+<p>JavaScript is a fairly forgiving language when it comes to errors; it didn’t implement exceptions at all until ECMAScript version 3. Instead of alerting a user to an error in a program, it just failed silently in the background, and this is sometimes still the case. It might seem like a good idea at first, but the error might give unexpected or incorrect results that nobody spots, or lurk in the background for a long time before causing the program to crash spectacularly. Failing silently makes errors difficult to spot and longer to track down.
+
+    For this reason, a ninja programmer should ensure that the code they write fails loudly in development so any errors can be identified and fixed quickly. In production, a ninja programmer should try to make the code fail gracefully (although not completely silently ― we still need to know there’s an error), so the user experience is not affected, if possible. This is achieved by making sure exceptions are caught and dealt with, and code is tested rigorously.</p>
+<h3>Strict mode</h3>
+<p>Strict mode encourages a better quality of JavaScript to be written that befits a ninja programmer, so its use is recommended.<br>
+
+    Strict mode simply requires the following string to be added to the first line of a JavaScript file:<br>
+
+    'use strict';<br>
+    This will be picked up by any JavaScript engine that uses strict mode. If the engine does not support strict mode, this string will simply be ignored.<br>
+
+    To see it in action, if you try to assign a value to a variable that is undeclared in strict mode, you'll get an exception, instead of a warning:</p><br>
+<h4>Linting Tools</h4>
+<p>Linting tools such as JS Lint, JS Hint,and ES Lint can be used to test the quality of JavaScript code, beyond simply using strict mode. They are designed to highlight any sloppy programming practices or syntax errors, and will complain if certain style conventions are not followed, such as how code is indented. They can be very unforgiving and use some opinionated coding conventions, such as not using the ++ and -- increment operators (in the case of JS Lint). Linting tools are also useful for enforcing a programming style guide. This is particularly useful when you are working in a team, as it ensures everybody follows the same conventions.</p>
+<h4>Feature Detection</h4><br><p>The recommended way to determine browser support for a feature is to use feature detection. This is done using an if statement to check whether an object or method exists before trying to actually call the method. For example, say we want to use the shiny new holoDeck API (as far as I know, this doesn't actually exist ... yet), we would wrap any method calls inside the following if block:
+<br>
+    if (window.holoDeck) {<br>
+    virtualReality.activate();<br>
+    }<br>
+    This ensures that no error occurs if the browser doesn’t support the method, because referencing a nonexistent object such as window.virtualReality will return undefined . As it’s a falsy value, the if block won’t run, but calling the method virtualReality.activate() outside of the if block would cause an exception to be thrown. Feature detection guarantees that the method is only called if it actually exists and fails gracefully, without any exceptions being thrown, if the method doesn't exist.
+    <br>
+    Modernizris a library that offers an easy way to implement feature detection andCan I Use?is another useful resource for checking which features are currently supported in different browsers.
+    <br>
+    The 'old-school' way of checking for browser support was known asbrowser sniffing. This involves using the string returned by window.navigator.userAgent property that we met in the last chapter to identify the user’s browser. The relevant methods can then be used for that browser. This approach is not recommended, however, because the user agent string cannot be relied upon to be accurate. Additionally, given the vast array of features you might be developing for, and the shifting nature of support for them across many browsers, this would extremely difficult to implement and maintain.</p>
+<h3>Debugging the browser</h3>
+<p>Debugging is the process of finding out where bugs occur in the code and then dealing with them. In many cases, the point at which an error occurs is not always where it originated, so you’ll need to run through the program to see what’s happening at different stages of its execution. When doing this, it can be useful to create what are known as breakpoints, which halt the progress of the code and allow us to view the value of different variables at that point in the program. There are a number of options for debugging JavaScript code in the browser.</p>
+<h4>The Alert</h4>
+
+<p>The most basic form of debugging is to use the alert() method to show a dialog at certain points in the code. Because alert() stops a program from running until OK is clicked, it allows us to effectively put breakpoints in the code that let us check the value of variables at that point to see if they’re what we expect them to be. </p>
+<h4>Console</h4><br>
+<p>Most modern JavaScript environments have a console object that provides a number of methods for logging information and debugging. It's not officially part of the ECMAScript specification, but is well supported in all the major browsers and Node.js.
+
+    We've already seen and used the console.log() method. This can be used to log the value of variables at different stages of the program, although it will not actually stop the execution of the program in the same way as alert() does. For example, we could add some console.log() statements in the amIOldEnough() function,The console.trace() method will log an interactive stack trace in the console. This will show the functions that were called in the lead up to an exception occurring while the code is running. </p>
+<h3>Error objects</h3>
+<p>An error object can be created by the host environment when an exception occurs, or it can be created in the code using a constructor function, like so:<br>
+
+    const error = new Error();<br>
+    This constructor function takes a parameter that’s used as the error message:<br>
+
+    const error = new Error('Oops, something went wrong');<br>
+    There are seven more error objects used for specific errors:<br>
+
+    EvalError is not used in the current ECMAScript specification and only retained for backwards compatibility. It was used to identify errors when using the global eval() function.
+    <br>
+    RangeError is thrown when a number is outside an allowable range of values.<br>
+
+    ReferenceError is thrown when a reference is made to an item that doesn’t exist. For example, calling a function that hasn't been defined.<br>
+
+    SyntaxError is thrown when there’s an error in the code’s syntax.<br>
+
+    TypeError is thrown when there’s an error in the type of value used; for example, a string is used when a number is expected.<br>
+
+    URIError is thrown when there’s a problem encoding or decoding the URI.<br>
+
+    InternalError is a non-standard error that is thrown when an error occurs in the JavaScript engine. A common cause of this too much recursion.<br>
+
+    These error objects can also be used as constructors to create custom error objects:<br>
+
+    const error = new TypeError('You need to use numbers in this function');<br>
+    All error objects have a number of properties, but they’re often used inconsistently across browsers. The only properties that are generally safe to use are:<br>
+
+    The name property returns the name of the error constructor function used as a string, such as 'Error' or 'ReferenceError'.<br>
+
+    The message property returns a description of the error and should be provided as an argument to the Error constructor function.<br>
+
+    The stack property will return a stack trace for that error. This is a non-standard property and it’s recommended that it is not safe to use in production sites.</p>
+<h3>Throwing exceptions</h3><br>
+The throw statement can be applied to any JavaScript expression, causing the execution of the program to stop. For example, all the following lines of code will cause a program to halt:
+<br>
+throw 2;<br>
+throw 'Up';<br>
+throw { toys: 'out of pram' };<br>
+It is best practice, however, to throw an error object. This can then be caught in a catch block, which is covered later in the chapter:<br>
+
+throw new Error('Something has gone badly wrong!');<br>
+As an example, let’s write a function called squareRoot() to find the square root of a number. This can be done using the Math.sqrt() method, but it returns NaN for negative arguments. This is not strictly correct (the answer should be an imaginary number, but these are unsupported in JavaScript).
+<br>
+<h4>try , catch , and finally</h4>
+<p>If we suspect a piece of code will result in an exception, we can wrap it in a try block. This will run the code inside the block as normal, but if an exception occurs it will pass the error object that is thrown onto a catch block. Here’s a simple example using our squareRoot() function from earlier:
+<br>
+function imaginarySquareRoot(number) {<br>
+'use strict';<br>
+try {<br>
+return String(squareRoot(number));<br>
+} catch(error) {<br>
+return squareRoot(-number)+'i';<br>
+}<br>
+}<br>
+The code inside the catch block will only run if an exception is thrown inside the try block. The error object is automatically passed as a parameter to the catch block. This allows us to query the error name, message and stack properties, and deal with it appropriately
+</p>
+
+<h3>Testing frameworks</h3>
+<p>Test-driven development(TDD) is the process of writing tests before any actual code. Obviously these tests will initially fail, because there is no code to test. The next step is to write some code to make the tests pass. After this, the code is refactored to make it faster, more readable, and remove any repetition. The code is continually tested at each stage to make sure it continues to work. This process should be followed in small piecemeal chunks every time a new feature is implemented, resulting in the following workflow:
+<br>
+1. Write tests (that initially fail)
+<br>
+2. Write code to pass the tests
+<br>
+3. Refactor the code
+<br>
+4. Test refactored code
+<br>
+5. Write more tests for new features
+<br></p>
+</body>
+</html>

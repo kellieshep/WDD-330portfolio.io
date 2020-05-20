@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Dos</title>
+    <style>
+        /* Remove margins and padding from the list */
+        ul {
+list-style: none;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the list items */
+        ul li {
+            cursor: pointer;
+            padding: 1em 1em 1em 2em;
+            text-decoration: none;
+            position: relative;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 18px;
+            transition: 0.2s;
+            width: 150px;
+
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        button{
+            font-size: x-large;
+            border: 1px solid black;
+        }
+        /* When clicked on, add a background color and strike out text */
+        ul li.checked {
+
+            text-decoration: line-through;
+        }
+
+        /* Add a "checked" mark when clicked on */
+        ul li.checked::before {
+            content: '☒';
+            position: absolute;
+            border: 1px solid black;
+            top: 1em;
+            left: 3px;
+            margin-right: 1em;
+            height: 20px;
+            width: 15px;
+        }
+        li span{
+            position: absolute;
+            left: 175px;
+        }
+        .addBtn{
+            border:1px black solid;
+            padding: .35em;
+        }
+        input{
+            border: 1px black solid;
+            padding: .5em;
+        }
+        #new{
+            margin-top: 1em;
+        }
+        body{
+margin-left: 40%;
+        }
+    </style>
+</head>
+<body>
+<h1>To Dos</h1>
+<form>
+    <ul id="myList">
+
+    </ul>
+<span id="toDo"></span>
+</form>
+<div id="new">
+<input type="text" id="newItem" placeholder="To do...">
+<span onclick="newItem()" class="addBtn">+</span>
+</div>
+<script>
+    let toDo = [];
+    localStorage.setItem("item", "done");
+    const mylist = document.getElementsByTagName("li");
+    let i;
+    for (i = 0; i < mylist.length; i++) {
+        const span = document.createElement("SPAN");
+        const txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        mylist[i].appendChild(span);
+    }
+    // Click on a close button to hide the current list item
+    const close = document.getElementsByClassName("close");
+
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            const div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+    // Add a "checked" symbol when clicking on a list item
+    const list = document.querySelector('ul');
+    list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'li') {
+            ev.target.classList.toggle('checked');
+        }
+    }, false);
+    function newItem() {
+        const li = document.createElement("li");
+        const inputValue = document.getElementById("newItem").value;
+        const t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("You must write something!");
+        } else {
+            document.getElementById("myList").appendChild(li);
+        }
+        document.getElementById("newItem").value = "";
+        const box = document.createElement("INPUT")
+        const span = document.createElement("SPAN");
+        const txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        box.setAttribute("type", "checkbox");
+        li.appendChild(box);
+        span.appendChild(txt);
+        li.appendChild(span);
+        let newList = {item:span, done:false};
+        toDo.push(newList);
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                const div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+    }
+
+   // UI actions
+   // Show a list of tasks
+   // Add a new task
+   // Complete a task
+   // Remove a task
+   // Filter tasks (complete/incomplete)
+    //Data sources: localStorage
+    //todo: { id : timestamp, content: string, completed: bool }
+    //toDoList = [toDo];
+    //Initial Module list: ToDos.js, localStorage helpers (ls.js), utilities.js
+
+  // let leftToDo = (myList) => (document.getElementById("myNodeList").innerHTML=myList.getElementsByClassName("checked").length);
+</script>
+</body>
+
+</html>
