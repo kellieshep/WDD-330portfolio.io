@@ -78,6 +78,7 @@ margin-left: 40%;
 
     </ul>
 <span id="toDo"></span>
+    <div class="totals"></div>
 </form>
 <div id="new">
 <input type="text" id="newItem" placeholder="To do...">
@@ -105,10 +106,12 @@ margin-left: 40%;
         }
     }
     // Add a "checked" symbol when clicking on a list item
-    const list = document.querySelector('ul');
+    
+   const list = document.querySelector('UL');
     list.addEventListener('click', function(ev) {
-        if (ev.target.tagName === 'li') {
+        if (ev.target.tagName === 'LI') {
             ev.target.classList.toggle('checked');
+
         }
     }, false);
     function newItem() {
@@ -122,12 +125,11 @@ margin-left: 40%;
             document.getElementById("myList").appendChild(li);
         }
         document.getElementById("newItem").value = "";
-        const box = document.createElement("INPUT")
+
         const span = document.createElement("SPAN");
         const txt = document.createTextNode("\u00D7");
         span.className = "close";
-        box.setAttribute("type", "checkbox");
-        li.appendChild(box);
+
         span.appendChild(txt);
         li.appendChild(span);
         let newList = {item:span, done:false};
