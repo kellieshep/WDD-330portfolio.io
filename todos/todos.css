@@ -1,0 +1,76 @@
+/* Remove margins and padding from the list */
+ul {
+    list-style: none;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the list items */
+ul li {
+    cursor: pointer;
+    padding: 1em 1em 1em 2em;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 18px;
+    transition: 0.2s;
+    width: 150px;
+
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+button{
+    font-size: x-large;
+    border: 1px solid black;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    border: 1px solid black;
+    top: 1em;
+    left: 3px;
+    margin-right: 1em;
+    height: 20px;
+    width: 15px;
+}
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+
+    text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+    content: '☒';
+    position: absolute;
+    border: 1px solid black;
+    top: 1em;
+    left: 3px;
+    margin-right: 1em;
+    height: 20px;
+    width: 15px;
+}
+li span{
+    position: absolute;
+    left: 175px;
+}
+.addBtn{
+    border:1px black solid;
+    padding: .35em;
+}
+input{
+    border: 1px black solid;
+    padding: .5em;
+}
+#new{
+    margin-top: 1em;
+}
+body{
+    margin-left: 40%;
+}
