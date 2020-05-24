@@ -26,7 +26,7 @@ list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
         ev.target.classList.toggle('checked');
         for (const toDoElement of toDo) {
-            if(toDoElement.id=ev.target.id){
+            if(toDoElement.id === ev.target.id){
                 toDoElement.done=!toDoElement.done;
             }
         }
