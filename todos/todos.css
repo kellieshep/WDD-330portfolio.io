@@ -2,11 +2,15 @@
 ul {
     list-style: none;
     border-collapse: collapse;
-    margin: 0;
+
     padding: 0;
 }
 
+
 /* Style the list items */
+li{
+    margin-top:-1px;
+}
 ul li {
     cursor: pointer;
     padding: 1em 1em 1em 2em;
