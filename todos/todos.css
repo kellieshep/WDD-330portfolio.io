@@ -1,11 +1,11 @@
 /* Remove margins and padding from the list */
 ul {
     list-style: none;
-    border-collapse: collapse;
-
     padding: 0;
 }
-
+h1{
+    margin-left: 1.6em;
+}
 
 /* Style the list items */
 li{
@@ -17,7 +17,6 @@ ul li {
     text-decoration: none;
     position: relative;
     border: 1px solid black;
-    border-collapse: collapse;
     font-size: 18px;
     transition: 0.2s;
     width: 150px;
@@ -77,4 +76,5 @@ input{
 }
 body{
     margin-left: 40%;
+    font-family: sans-serif;
 }
