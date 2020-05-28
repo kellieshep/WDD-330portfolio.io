@@ -1,7 +1,7 @@
 //localStorage.toDoList = [];
 let toDo = [];
 let notDone = [];
-let nextid = 1000;
+
 // Click on a close button to hide the current list item
 const close = document.getElementsByClassName("close");
 
@@ -37,7 +37,7 @@ for (i = 0; i < mylist.length; i++) {
     mylist[i].appendChild(span);
 }
 
-
+// If the x is pressed to delete item this removes the item.
 // this one removes from the list
 for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
@@ -50,7 +50,7 @@ for (i = 0; i < close.length; i++) {
         toDo.splice(objIndex,1);
     }
 }
-// Add a "checked" symbol when clicking on a list item
+// Add a "checked" symbol when clicking on a list item and changes the array element done:
 
 const list = document.querySelector('UL');
 list.addEventListener('click', function(ev) {
@@ -70,7 +70,6 @@ list.addEventListener('click', function(ev) {
     // update local storage
     let toDoJson = JSON.stringify(toDo);
     localStorage.toDoList = toDoJson;
-
 
     // update not done number
     totals();
@@ -131,33 +130,16 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
     }
 
     let newList = {id: new Date().getTime(), item: inputValue, done: li.done};
-    nextid++;
+
     //adding the elements to the array.
     if (!initialBuild) {
         toDo.push(newList);
     }
 
-// If the x is pressed to delete item this hides the item. **needs to delete the object from the array and updates storage as well.
-    for (let i = 0; i < close.length; i++) {
-        close[i].onclick = function () {
-            const div = this.parentElement;
-            console.log('hello');
-            div.remove();
-
-            //objIndex = toDo.findIndex((obj => obj.id == 1));
 
 
 
-//            for (const toDoElement of toDo) {
-//                if (toDoElement.id = ev.target.id) {
-//
-//
-//                }
-//
-//
-//            }
-        }
-    }
+
 }
 //***Adding the total to the bottom of the list.
 function checkDone(done) {

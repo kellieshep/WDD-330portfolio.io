@@ -65,14 +65,17 @@ li span{
 }
 .addBtn{
     border:1px black solid;
-    padding: .35em;
+    padding: .32em;
+    position: absolute;
 }
 input{
     border: 1px black solid;
     padding: .5em;
+
 }
 #new{
     margin-top: 1em;
+
 }
 body{
     margin-left: 40%;
