@@ -93,7 +93,9 @@ function newItem() {
 //Building the item from local storage and the new list items added.
 
 function buildItem(inputValue, id=1, done=null, initialBuild = false) {
+    //create a li to display
     const li = document.createElement("li");
+    // create text out of the inputValue
     const t = document.createTextNode(inputValue);
     //localStorage.setItem(li, inputValue);
     li.appendChild(t);
@@ -123,6 +125,7 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
     if (done !== null) {
         li.done = done;
         if(done == true){
+            //adding a class if done=true
             li.classList.add("checked");
         }
     } else {
@@ -147,7 +150,7 @@ function checkDone(done) {
 }
 
 function totals() {
-    //document.getElementById("result").innerHTML = toDo.some(checkDone);
+  // Checking the array for true or false then outputting it to the list.
     notDone = toDo.filter(function(toDoItem){
         return toDoItem.done == false;
     });
