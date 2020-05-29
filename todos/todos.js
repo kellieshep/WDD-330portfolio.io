@@ -37,7 +37,7 @@ for (i = 0; i < mylist.length; i++) {
     mylist[i].appendChild(span);
 }
 
-// If the x is pressed to delete item this removes the item.
+
 // this one removes from the list
 for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
@@ -50,7 +50,7 @@ for (i = 0; i < close.length; i++) {
         toDo.splice(objIndex,1);
     }
 }
-// Add a "checked" symbol when clicking on a list item and changes the array element done:
+// Add a "checked" symbol when clicking on a list item
 
 const list = document.querySelector('UL');
 list.addEventListener('click', function(ev) {
@@ -59,7 +59,7 @@ list.addEventListener('click', function(ev) {
         for (const toDoElement of toDo) {
             if(toDoElement.id == ev.target.id){
                 toDoElement.done=!toDoElement.done;
-               // console.log(toDo);
+                //console.log(toDo);
             }
 
         }
@@ -70,6 +70,7 @@ list.addEventListener('click', function(ev) {
     // update local storage
     let toDoJson = JSON.stringify(toDo);
     localStorage.toDoList = toDoJson;
+
 
     // update not done number
     totals();
@@ -93,13 +94,11 @@ function newItem() {
 //Building the item from local storage and the new list items added.
 
 function buildItem(inputValue, id=1, done=null, initialBuild = false) {
-    //create a li to display
     const li = document.createElement("li");
-    // create text out of the inputValue
     const t = document.createTextNode(inputValue);
     //localStorage.setItem(li, inputValue);
     li.appendChild(t);
-    // Making sure that there is an item added to the list
+    // Making sure that there is an item on the list
     if (inputValue === '') {
         alert("You must write something!");
     } else {
@@ -124,8 +123,7 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
 // adding done to the object
     if (done !== null) {
         li.done = done;
-        if (done == true) {
-            //adding a class if done=true
+        if(done == true){
             li.classList.add("checked");
         }
     } else {
@@ -133,7 +131,7 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
     }
 
     let newList = {id: new Date().getTime(), item: inputValue, done: li.done};
-
+    nextid++;
     //adding the elements to the array.
     if (!initialBuild) {
         toDo.push(newList);
@@ -145,18 +143,35 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
             const div = this.parentElement;
             console.log('hello');
             div.remove();
+
+            //objIndex = toDo.findIndex((obj => obj.id == 1));
+
+
+
+//            for (const toDoElement of toDo) {
+//                if (toDoElement.id = ev.target.id) {
+//
+//
+//                }
+//
+//
+//            }
         }
     }
 }
-        function totals() {
-            // Checking the array for true or false then outputting it to the list.
-            notDone = toDo.filter(function (toDoItem) {
-                return toDoItem.done == false;
-            });
-            complete = toDo.filter(function (toDoItem) {
-                return toDoItem.done == true;
-            });
-            console.log(notDone);
-            document.getElementById("result").innerHTML = notDone.length + " left to do /    " + complete.length + " completed";
-        }
+//***Adding the total to the bottom of the list.
+function checkDone(done) {
+    return done == true;
+}
 
+function totals() {
+    // Checking the array for true or false then outputting it to the list.
+    notDone = toDo.filter(function (toDoItem) {
+        return toDoItem.done == false;
+    });
+    complete = toDo.filter(function (toDoItem) {
+        return toDoItem.done == true;
+    });
+    console.log(notDone);
+    document.getElementById("result").innerHTML = notDone.length + " left to do /    " + complete.length + " completed";
+}
