@@ -1,7 +1,7 @@
 //localStorage.toDoList = [];
 let toDo = [];
 let notDone = [];
-
+let nextid = 1000;
 // Click on a close button to hide the current list item
 const close = document.getElementsByClassName("close");
 
@@ -59,7 +59,7 @@ list.addEventListener('click', function(ev) {
         for (const toDoElement of toDo) {
             if(toDoElement.id == ev.target.id){
                 toDoElement.done=!toDoElement.done;
-                //console.log(toDo);
+               // console.log(toDo);
             }
 
         }
@@ -99,7 +99,7 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
     const t = document.createTextNode(inputValue);
     //localStorage.setItem(li, inputValue);
     li.appendChild(t);
-    // Making sure that there is an item on the list
+    // Making sure that there is an item added to the list
     if (inputValue === '') {
         alert("You must write something!");
     } else {
@@ -124,7 +124,7 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
 // adding done to the object
     if (done !== null) {
         li.done = done;
-        if(done == true){
+        if (done == true) {
             //adding a class if done=true
             li.classList.add("checked");
         }
@@ -139,24 +139,27 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
         toDo.push(newList);
     }
 
+// If the x is pressed to delete item this hides the item. **needs to delete the object from the array and updates storage as well.
+    for (let i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            const div = this.parentElement;
+            console.log('hello');
+            div.remove();
+        }
 
 
+    }
 
 
-}
-//***Adding the total to the bottom of the list.
-function checkDone(done) {
-    return done == true;
-}
-
-function totals() {
-  // Checking the array for true or false then outputting it to the list.
-    notDone = toDo.filter(function(toDoItem){
-        return toDoItem.done == false;
-    });
-    complete = toDo.filter(function(toDoItem){
-        return toDoItem.done == true;
-    });
-    console.log(notDone);
-    document.getElementById("result").innerHTML = notDone.length + " left to do /    " + complete.length + " completed";
+    function totals() {
+        // Checking the array for true or false then outputting it to the list.
+        notDone = toDo.filter(function (toDoItem) {
+            return toDoItem.done == false;
+        });
+        complete = toDo.filter(function (toDoItem) {
+            return toDoItem.done == true;
+        });
+        console.log(notDone);
+        document.getElementById("result").innerHTML = notDone.length + " left to do /    " + complete.length + " completed";
+    }
 }
