@@ -146,20 +146,17 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
             console.log('hello');
             div.remove();
         }
-
-
-    }
-
-
-    function totals() {
-        // Checking the array for true or false then outputting it to the list.
-        notDone = toDo.filter(function (toDoItem) {
-            return toDoItem.done == false;
-        });
-        complete = toDo.filter(function (toDoItem) {
-            return toDoItem.done == true;
-        });
-        console.log(notDone);
-        document.getElementById("result").innerHTML = notDone.length + " left to do /    " + complete.length + " completed";
     }
 }
+        function totals() {
+            // Checking the array for true or false then outputting it to the list.
+            notDone = toDo.filter(function (toDoItem) {
+                return toDoItem.done == false;
+            });
+            complete = toDo.filter(function (toDoItem) {
+                return toDoItem.done == true;
+            });
+            console.log(notDone);
+            document.getElementById("result").innerHTML = notDone.length + " left to do /    " + complete.length + " completed";
+        }
+
