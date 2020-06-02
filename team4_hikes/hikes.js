@@ -11,7 +11,8 @@ const hikeList = [
       "Beautiful short hike along the Bechler river to Bechler Falls",
     directions:
       "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road.Drive to the end of the Cave Falls road. There is a parking area at the trailhead."
-  }, 
+  ,comments: []
+  },
   {
     name: "Teton Canyon",
     imgSrc: "teton.jpg",
@@ -21,6 +22,7 @@ const hikeList = [
     description: "Beautiful short (or long) hike through Teton Canyon.",
     directions:
       "Take Highway 33 East to Driggs. Turn left onto Teton Canyon Road. Follow that road for a few miles then turn right onto Stateline Road for a short distance, then left onto Alta Road. Veer right after Alta back onto Teton Canyon Road. There is a parking area at the trailhead."
+    ,comments: []
   },
   {
     name: "Dunanda Falls",
@@ -32,6 +34,7 @@ const hikeList = [
       "Beautiful hike through Bechler meadows river to Dunanda Falls",
     directions:
       "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive to until you see the sign for Bechler Meadows on the left. Turn there. There is a parking area at the trailhead."
+    ,comments: []
   }
 ];
 
@@ -133,6 +136,69 @@ function renderOneHikeFull(hike) {
       <h3>Directions</h3>
       <p>${hike.directions}</p>
     </div>
+    <div><h3>Add a comment</h3>
+    <textarea id="textInput"></textarea>
+    <button id="addComment">Add Comment</button>
+    </div>
+    <div><h3>Comments</h3>
+    <ul id="commentsList"></ul>
+    </div>
+    
   </div>`;
   return item; 
 }
+
+
+// Methods for the comments
+function getAllcomments(hike){
+ const commentarr = hike.comments;
+
+  return commentarr;
+}
+
+
+
+function renderCommentList(hike){
+  const li = document.createElement("li");
+  const t = document.createTextNode(inputValue);
+  //localStorage.setItem(li, inputValue);
+  li.appendChild(t);
+  // Making sure that there is an item on the list
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("commentsList").appendChild(li);
+  }
+  //building the list with the entered information.
+  document.getElementById("newComment").value = "";
+
+  const span = document.createElement("SPAN");
+  span.appendChild(txt);
+  li.appendChild(span);
+  if (date !== null) {
+    li.date = date;
+  } else {
+    // adding a date as the id.
+    li.date = new Date().getTime();
+  }
+
+}
+
+
+
+//add a comment button
+function addComment() {
+
+  const commentButton = document.getElementById("addComment");
+  const userComment = document.getElementById("textInput");
+  let commentsList = {id: new Date().getTime(), content: userComment, type: hike};
+  commentButton.addEventListener('click', () => {this.showHikeList();});
+  this.parentElement.after(commentButton);
+  return commentButton;
+}
+
+
+/*const newComment = (hikeName,comment) =>{
+  name: hikeName,
+ date: new Date(),
+  content: comment};*/

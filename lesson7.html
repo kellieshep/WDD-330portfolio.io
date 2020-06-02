@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 7:Chapters 11 &amp 13</title>
+</head>
+<link rel="stylesheet" href="./stylesheets/styles.css" />
+</head>
+<body>
+<header id="header"><h1>Week 7<br>
+    Chapter 11 & 13<br></h1>
+    <section id="line"></section>
+</header>
+<section id="chapter11">
+<h1>Chapter 11: Further Functions</h1>
+<p>The fact that functions are first-class objects means they can have properties and methods themselves. For example, all functions have a length property that returns the number of parameters the function has.</p>
+<h2>Call and Apply Methods</h2>
+<p>The call() method can be used to set the value of this inside a function to an object that is provided as the first argument.</p>
+<p>The apply() method works in the same way, except the arguments of the function are provided as an array, even if there is only one argument:</p>
+<p>These are two powerful methods, as they allow generalized functions to be written that are not tied to specific objects by being methods of that object. This gives flexibility over how the functions can be used.</p>
+<h2>Custom Properties</h2>
+<p>There is nothing to stop you adding your own properties to functions in the same way that you can add properties to any object in JavaScript. </p>
+<p> For example, you could add a description property to a function that describes what it does:<br>
+
+    square.description = 'Squares a number that is provided as an argument'<br>
+    << 'Squares a number that is provided as an argument'</p>
+<h3>Memoization</h3>
+<p>If a function takes some time to compute a return value, we can save the result in a cache property. Then if the same argument is used again later, we can return the value from the cache, rather than having to compute the result again. </p>
+<p>An Immediately Invoked Function Expression– or IIFE – (pronounced 'iffy') is an anonymous function that, as the name suggests, is invoked as soon as it’s defined. This is easily achieved by placing parentheses at the end of the function definition (remember we use parentheses to invoke a function). The function also has to be made into an expression, which is done by placing the whole declaration inside parentheses.</p>
+<p>IIFEs are a useful way of performing a task while keeping any variables wrapped up within the scope of the function. This means the global namespace is not polluted with lots of variable names.</p>
+<h3>Temporary Variables</h3>
+<p>There is no way to remove a variable from a scope once it’s been declared. If a variable is only required temporarily, it may cause confusion if it’s still available later in the code. Even worse, the name of the variable may clash with another piece of code (an external JavaScript library, for example) resulting in errors. Placing any code that uses the temporary variable inside an IIFE will ensure it’s only available while the IIFE is invoked, then it will disappear.</p>
+<h3>Initialization Code</h3>
+<p>An IIFE can be used to set up any initialization code that there’ll be no need for again. Because the code is only run once, there’s no need to create any reusable, named functions, and all the variables will also be temporary. An IIFE will be invoked once, and can set up any variables, objects and event handlers when the page loads. </p>
+<p>Note that much of this can be achieved in ES6 by simply placing the code inside a block. This is because variables have block scope when const or let are used, whereas in previous versions of JavaScript, only functions maintained the scope of variables. </p>
+<h3>Creating Self-contained Code Blocks</h3>
+<p>An IIFE can be used to enclose a block of code inside its own private scope so it doesn’t interfere with any other part of the program. Using IIFEs in this way means code can be added or removed separately. </p>
+<h3>Functions that Define and Rewrite Themselves</h3>
+<p>The dynamic nature of JavaScript means that a function is able to not only call itself, but define itself, and even redefine itself. This is done by assigning an anonymous function to a variable that has the same name as the function. </p>
+<p>If the function is also assigned to another variable, this variable will maintain the original function definition and not be rewritten. This is because the original function is assigned to a variable, then within the function, a variable with the same name as the function is assigned to a different function. </p>
+<p>If any properties have previously been set on the function, these will be lost when the function redefines itself.</p>
+<p>This is called theLazy Definition Patternand is often used when some initialization code is required the first time it’s invoked. This means the initialization can be done the first time it’s called, then the function can be redefined to what you want it to be for every subsequent invocation.</p>
+<h3>Init-Time Branching</h3>
+<p>This technique can be used with the feature detection that we discussed in the last chapter to create functions that rewrite themselves, known as init-time branching. This enables the functions to work more effectively in the browser, and avoid checking for features every time they’re invoked.</p>
+<h3><a class="inLinks" href="http://callbackhell.com/">Call Back Hell website</a></h3>
+<h3>The Promise Life Cycle</h3>
+   <p> When a promise is created, it calls an asynchronous operation and is then said to bepending. It remains in this state while the operation is taking place. At this stage, the promise is said to beunsettled. Once the operation has completed, the promise is said to have beensettled. A settled promise can result in two different outcomes:
+   </p>
+    <ul>
+   <li> Resolved ― the asynchronous operation was completed successfully.</li>
+
+   <li> Rejected ― the asynchronous operation didn’t work as expected, wasn't successfully completed or resulted in an error.</li>
+    </ul>
+   <p>Both these outcomes will return any relevant data, and you can take the appropriate action based on the outcome of the promise.</p>
+<h3>Pure Functions</h3>
+<p>A key aspect of functional programming is its use of pure functions. A pure function is a function that adheres to the following rules:</p>
+<p>
+<ol>
+<li> The return value of a pure function should only depend on the values provided as arguments. It doesn't rely on values from somewhere else in the program.</li>
+
+<li> There are no side-effects. A pure function doesn't change any values or data elsewhere in the program. It only makes non-destructive data transformations and returns new values, rather than altering any of the underlying data.</li>
+
+<li> Referential transparency. Given the same arguments, a pure function will always return the same result.</li>
+</ol>
+<p>In order to follow these rules, any pure function must have:</p>
+<ul>
+<li>At least one argument; otherwise the return value must depend on something other than the arguments of the function, breaking the first rule</li>
+    <li>A return value; otherwise there’s no point in the function (unless it has changed something else in the program – in which case, it’s broken the 'no side-effects' rule).</li></ul>
+<p>Pure functions help to make functional programming code more concise and predictable than in other programming styles. Referential transparency makes pure functions easy to test as they can be relied on to return the same values when the same arguments are provided. Another benefit is that any return values can be cached, since they’re always the same (see the section on Memoization above). The absence of any side-effects tends to reduce the amounts of bugs that can creep into your code, because there are no surprise dependencies as they only rely on any values provided as arguments.</p>
+<h3>Curring</h3>
+<p>A function is said to be curried when not all arguments have been supplied to the function, so it returns another function that retains the arguments already provided, and expects the remaining arguments that were omitted when the original function was called. A final result is only returned once all the expected arguments have eventually been provided.
+</p>
+<p>Currying relies on higher-order functions that are able to return partially applied functions. All curried functions are higher-order functions because they return a function, but not all higher-order functions are curried.</p>
+
+    <p>The power() function above is an example of a higher-order function that can be curried as it will expects two arguments, but will return another, curried function, if the only one argument is provided.</p>
+</section>
+<section id="chapter13">
+    <h1>Chapter 13: Ajax</h1>
+<p>Ajax is a technique that allows web pages to communicate asynchronously with a server, and it dynamically updates web pages without reloading. This enables data to be sent and received in the background, as well as portions of a page to be updated in response to user events, while the rest of the program continues to run.</p>
+<p>  The use of Ajax revolutionized how websites worked, and ushered in a new age of web applications. Web pages were no longer static, but dynamic applications.</p>
+<h5>Asynchronous</h5>
+<p> When a request for data is sent, the program doesn’t have to stop and wait for the response. It can carry on running, waiting for an event to fire when a response is received. By using callbacks to manage this, programs are able to run in an efficient way, avoiding lag as data is transferred back and forth.</p>
+<h5> JavaScript</h5>
+<p> JavaScript was always considered a 'front-end' language, not used to communicate with the server. Ajax enabled JavaScript to send requests and receive responses from a server, allowing content to be updated in real time.</p>
+<h5> XML</h5>
+    <p>When the term Ajax was originally coined, XML documents were often used to return data. Many different types of data can be sent, but by far the most commonly used in Ajax nowadays is JSON, which is more lightweight and easier to parse than XML. (Although it has never really taken off, the termAjaj is sometimes used to describe the technique.)JSON also has the advantage of being natively supported in JavaScript, so you can deal with JavaScript objects rather than having to parse XML files using DOM methods.</p>
+<h3>The Fetch API</h3>
+    <p>The XMLHttpRequest object was finally standardized by the WHATWG and W3C as part of the HTML5 specification, despite it originally being implemented by Microsoft many years earlier, and already available in most browsers.
+    </p>
+   <p> It has since been superseded by theFetch API, which is currently a living standard for requesting and sending data asynchronously across a network. The Fetch API uses promises to avoid callback hell, and also streamlines a number of concepts that had become cumbersome when using the XMLHttpRequest object.
+   </p>
+<h3>Basic Usage</h3>
+<p>The Fetch API provides a global fetch() method that only has one mandatory argument, which is the URL of the resource you wish to fetch.</p>
+    <p> fetch('https://example.com/data')</p>
+    <p>.then( // code that handles the response )</p>
+    <p>.catch( // code that runs if the server returns an error )</p>
+   <p> As you can see, the fetch() method returns a promise that resolves to the response returned from the URL that was provided as an argument. In the example above, the promise will be resolved when a response is received from the URL 'https:example.com/data'. Because it’s a promise, we can also use a catch statement at the end to deal with any errors that may occur
+   </p>
+    <h3>Redirect</h3>
+    <p>The redirect() method can be used to redirect to another URL. It creates a new promise that resolves to the response from the redirected URL.</p>
+    <h3> Text Responses</h3>
+    <p> The text() method takes a stream of text from the response, reads it to completion and then returns a promise that resolves to a USVSting object that can be treated as a string in JavaScript.</p>
+<p>The blob() method is used to read a file of raw data, such as an image or a spreadsheet. Once it has read the whole file, it returns a promise that resolves with a blob object.
+
+</p>
+<p>JSON is probably the most common format for AJAX responses. The json() method is used to deal with these by transforming a stream of JSON data into a promise that resolves to a JavaScript object.</p>
+    <h3> Request Interface</h3>
+    <p>We can get more fine-grained control over the request being made by providing a Request object as an argument. This allows a number of options to be set about the request.</p>
+
+    <p>Request objects are created using the Request() constructor, and include the following properties:</p>
+<ul id="json">
+    <li> url – The URL of the requested resource (the only property that is required).</li>
+    <li>  method – a string that specifies which HTTP method should be used for the request. By default, this is 'GET'.</li>
+    <li>  headers – This is a Headers object (see later section) that provides details of the request's headers.</li>
+    <li>  mode – Allows you to specify if CORS is used or not. CORS is enabled by default.</li>
+    <li> cache – Allows you to specify how the request will use the browser's cache. For example, you can force it to request a resource and update the cache with the result, or you can force it to only look in the cache for the resource.</li>
+    <li>  credentials – Lets you specify if cookies should be allowed with the request.</li>
+    <li> redirect – Specifies what to do if the response returns a redirect. There’s a choice of three values: 'follow' (the redirect is followed), 'error' (an error is thrown) or 'manual' (the user has to click on a link to follow the redirect).</li>
+</ul>
+   <p> The Web is built upon the Hypertext Transfer Protocol, or HTTP. When a client (usually a browser) makes a request to a server, it contains information about which HTTP verb to use.HTTP verbs, also known as HTTP methodsare the what HTTP uses to tell the server what type of request is being made, which then determines the server will deal with the request.
+
+       The five most commonly used verbs when dealing with resources on the web are:</p>
+<ul>
+    <li>GET requests to retrieve resources</li>
+
+    <li>POST requests, usually used to create a resource but can actually perform any task</li>
+
+    <li>PUT requests to upsert, which means insert a resource or update it entirely</li>
+
+    <li>PATCH requests to make partial updates to a resource</li>
+
+    <li>DELETE requests to delete a resources.</li></ul>
+
+    <p>By default, a link in a web page will make a GET request. Forms are also submitted using a GET request by default, but they will often use a POST request.</p>
+
+    <p>This <span><a class="inLinks" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">excellent blog post</a></span> by Rob Miller explains each of these verbs in more depth if you're interested in learning more about them.</p>
+
+
+</section>
+<footer>
+    <h4><a  href="index.html">Link to Home Page</a></h4>
+    <h3>	&copy; 2020 Kellie Shepherd - WDD-330</h3>
+</footer>
+</body>
+</html>

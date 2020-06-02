@@ -5,7 +5,7 @@ let nextid = 1000;
 // Click on a close button to hide the current list item
 const close = document.getElementsByClassName("close");
 
-if(typeof(localStorage.toDoList) !== "undefined" && localStorage.toDoList != ""){
+if (typeof (localStorage.toDoList) !== "undefined" && localStorage.toDoList != "") {
     toDo = JSON.parse(localStorage.toDoList);
     console.log(toDo);
 
@@ -13,7 +13,7 @@ if(typeof(localStorage.toDoList) !== "undefined" && localStorage.toDoList != "")
     //alert(toDo.length);
 
     let countStop = toDo.length;
-    for(let i = 0; i<countStop; i++){
+    for (let i = 0; i < countStop; i++) {
         //console.log(toDo[i]);
         let item = toDo[i];
         //console.log(item);
@@ -40,31 +40,30 @@ for (i = 0; i < mylist.length; i++) {
 
 // this one removes from the list
 for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
+    close[i].onclick = function () {
         const div = this.parentElement;
         div.style.display = "none";
 
         // remove from toDo array of objects
         let id = div.getAttribute("id");
         let objIndex = toDo.findIndex((obj => obj.id == id));
-        toDo.splice(objIndex,1);
+        toDo.splice(objIndex, 1);
     }
 }
 // Add a "checked" symbol when clicking on a list item
 
 const list = document.querySelector('UL');
-list.addEventListener('click', function(ev) {
+list.addEventListener('click', function (ev) {
     if (ev.target.tagName = 'LI') {
         ev.target.classList.toggle('checked');
         for (const toDoElement of toDo) {
-            if(toDoElement.id == ev.target.id){
-                toDoElement.done=!toDoElement.done;
+            if (toDoElement.id == ev.target.id) {
+                toDoElement.done = !toDoElement.done;
                 //console.log(toDo);
             }
 
         }
     }
-
 
 
     // update local storage
@@ -91,9 +90,10 @@ function newItem() {
     totals();
 
 }
+
 //Building the item from local storage and the new list items added.
 
-function buildItem(inputValue, id=1, done=null, initialBuild = false) {
+function buildItem(inputValue, id = 1, done = null, initialBuild = false) {
     const li = document.createElement("li");
     const t = document.createTextNode(inputValue);
     //localStorage.setItem(li, inputValue);
@@ -123,7 +123,7 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
 // adding done to the object
     if (done !== null) {
         li.done = done;
-        if(done == true){
+        if (done == true) {
             li.classList.add("checked");
         }
     } else {
@@ -147,7 +147,6 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
             //objIndex = toDo.findIndex((obj => obj.id == 1));
 
 
-
 //            for (const toDoElement of toDo) {
 //                if (toDoElement.id = ev.target.id) {
 //
@@ -159,13 +158,12 @@ function buildItem(inputValue, id=1, done=null, initialBuild = false) {
         }
     }
 }
+
 //***Adding the total to the bottom of the list.
-function checkDone(done) {
-    return done == true;
-}
+
 
 function totals() {
-    // Checking the array for true or false then outputting it to the list.
+    // Checking the array for true or false then outputting it to the totals.
     notDone = toDo.filter(function (toDoItem) {
         return toDoItem.done == false;
     });

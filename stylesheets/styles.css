@@ -44,3 +44,16 @@ h2{
 form{
     width: 30%;
 }
+.inLinks{
+
+    color: #333333;
+    text-decoration: underline;
+}
+#chapter11, #chapter13{
+    margin: 2em;
+    background-color: lightgray;
+   padding: 3em;
+}
+#json {
+    text-decoration: none;
+}
