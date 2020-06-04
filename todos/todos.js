@@ -141,7 +141,7 @@ function buildItem(inputValue, id = 1, done = null, initialBuild = false) {
     for (let i = 0; i < close.length; i++) {
         close[i].onclick = function () {
             const div = this.parentElement;
-            console.log('hello');
+           // console.log('hello');
             div.remove();
 
             //objIndex = toDo.findIndex((obj => obj.id == 1));

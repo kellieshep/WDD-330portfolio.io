@@ -1,4 +1,6 @@
-// MOVE EVERYTHING BELOW THIS POINT and uncomment import!
+import Comments from './comments.js';
+const hikeComments = new Comments('hikeComments');
+
 //create an array of hikes
 const hikeList = [
   {
@@ -11,8 +13,7 @@ const hikeList = [
       "Beautiful short hike along the Bechler river to Bechler Falls",
     directions:
       "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road.Drive to the end of the Cave Falls road. There is a parking area at the trailhead."
-  ,comments: []
-  },
+  }, 
   {
     name: "Teton Canyon",
     imgSrc: "teton.jpg",
@@ -22,7 +23,6 @@ const hikeList = [
     description: "Beautiful short (or long) hike through Teton Canyon.",
     directions:
       "Take Highway 33 East to Driggs. Turn left onto Teton Canyon Road. Follow that road for a few miles then turn right onto Stateline Road for a short distance, then left onto Alta Road. Veer right after Alta back onto Teton Canyon Road. There is a parking area at the trailhead."
-    ,comments: []
   },
   {
     name: "Dunanda Falls",
@@ -34,7 +34,6 @@ const hikeList = [
       "Beautiful hike through Bechler meadows river to Dunanda Falls",
     directions:
       "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive to until you see the sign for Bechler Meadows on the left. Turn there. There is a parking area at the trailhead."
-    ,comments: []
   }
 ];
 
@@ -69,6 +68,7 @@ export default class Hikes {
     this.parentElement.innerHTML = '';
     this.backButton.classList.remove('hidden');
     this.parentElement.appendChild(renderOneHikeFull(hike));
+    hikeComments.showCommentList(hike.name);
   }
   // in order to show the details of a hike ontouchend we will need to attach a listener AFTER the list of hikes has been built. The function below does that.
   addHikeListener() {
@@ -88,31 +88,33 @@ export default class Hikes {
     this.parentElement.before(backButton);
     return backButton;
   }
-  }
-  // methods responsible for building HTML.  Why aren't these in the class?  They don't really need to be, and by moving them outside of the exported class, they cannot be called outside the module...they become private.
-  function renderHikeList(parent, hikesList) {
+}
+
+// methods responsible for building HTML.  Why aren't these in the class?  They don't really need to be, and by moving them outside of the exported class, they cannot be called outside the module...they become private.
+function renderHikeList(parent, hikesList) {
   hikesList.forEach(hike => {
     parent.appendChild(renderOneHikeLight(hike));
   });
+  hikeComments.showCommentList();
 }
 
 function renderOneHikeLight(hike) {
-const item = document.createElement("li");
-item.classList.add('light');
-item.setAttribute('data-name', hike.name);
-item.innerHTML = ` <h2>${hike.name}</h2>
-<div class="image"><img src="${imgBasePath}${hike.imgSrc}" alt="${hike.imgAlt}"></div>
-<div>
-        <div>
-            <h3>Distance</h3>
-            <p>${hike.distance}</p>
-        </div>
-        <div>
-            <h3>Difficulty</h3>
-            <p>${hike.difficulty}</p>
-        </div>
-</div>`;
-return item;
+  const item = document.createElement("li");
+  item.classList.add('light');
+  item.setAttribute('data-name', hike.name);
+  item.innerHTML = ` <h2>${hike.name}</h2>
+  <div class="image"><img src="${imgBasePath}${hike.imgSrc}" alt="${hike.imgAlt}"></div>
+  <div>
+          <div>
+              <h3>Distance</h3>
+              <p>${hike.distance}</p>
+          </div>
+          <div>
+              <h3>Difficulty</h3>
+              <p>${hike.difficulty}</p>
+          </div>
+  </div>`;
+  return item;
 }
 
 function renderOneHikeFull(hike) {
@@ -136,69 +138,6 @@ function renderOneHikeFull(hike) {
       <h3>Directions</h3>
       <p>${hike.directions}</p>
     </div>
-    <div><h3>Add a comment</h3>
-    <textarea id="textInput"></textarea>
-    <button id="addComment">Add Comment</button>
-    </div>
-    <div><h3>Comments</h3>
-    <ul id="commentsList"></ul>
-    </div>
-    
   </div>`;
   return item; 
 }
-
-
-// Methods for the comments
-function getAllcomments(hike){
- const commentarr = hike.comments;
-
-  return commentarr;
-}
-
-
-
-function renderCommentList(hike){
-  const li = document.createElement("li");
-  const t = document.createTextNode(inputValue);
-  //localStorage.setItem(li, inputValue);
-  li.appendChild(t);
-  // Making sure that there is an item on the list
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("commentsList").appendChild(li);
-  }
-  //building the list with the entered information.
-  document.getElementById("newComment").value = "";
-
-  const span = document.createElement("SPAN");
-  span.appendChild(txt);
-  li.appendChild(span);
-  if (date !== null) {
-    li.date = date;
-  } else {
-    // adding a date as the id.
-    li.date = new Date().getTime();
-  }
-
-}
-
-
-
-//add a comment button
-function addComment() {
-
-  const commentButton = document.getElementById("addComment");
-  const userComment = document.getElementById("textInput");
-  let commentsList = {id: new Date().getTime(), content: userComment, type: hike};
-  commentButton.addEventListener('click', () => {this.showHikeList();});
-  this.parentElement.after(commentButton);
-  return commentButton;
-}
-
-
-/*const newComment = (hikeName,comment) =>{
-  name: hikeName,
- date: new Date(),
-  content: comment};*/
