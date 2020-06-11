@@ -82,3 +82,7 @@ textarea {
     height: 10em;
     resize: none;
 }
+.myCanvas {
+    border: dotted 2px black;
+    margin: 0 20px;
+}

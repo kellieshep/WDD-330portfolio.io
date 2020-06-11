@@ -49,11 +49,21 @@ form{
     color: #333333;
     text-decoration: underline;
 }
-#chapter11, #chapter13{
+#chapter11, #chapter13, #chapter8, #chapter12{
     margin: 2em;
     background-color: lightgray;
    padding: 3em;
 }
 #json {
     text-decoration: none;
+}
+.myCanvas {
+    border: dotted 2px black;
+}
+#Layer_1{
+    height: 100px;
+    right: 10em;
+
+    position: absolute;
+    margin-right: auto;
 }
