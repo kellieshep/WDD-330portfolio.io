@@ -54,16 +54,27 @@ form{
     background-color: lightgray;
    padding: 3em;
 }
+svg{
+    height: 100px;
+    width: 100px;
+}
 #json {
     text-decoration: none;
 }
 .myCanvas {
     border: dotted 2px black;
 }
-#Layer_1{
-    height: 100px;
-    right: 10em;
+.draganddrop .mc {
+    text-align: center;
+}
+#ac3 {
+    width: 35%;
+    heith: 10%;
+    border: 1px darkcyan dotted;
+    text-align: center;
 
-    position: absolute;
-    margin-right: auto;
+}
+#mouse1, #mouse2, #mouse3{
+    width: 10%;
+    heigth: 10%;
 }

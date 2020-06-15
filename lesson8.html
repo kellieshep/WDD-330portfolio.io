@@ -78,17 +78,29 @@
 <h3>SVGS</h3>
     <p> SVG stands forScalable Vector Graphics, a specific file format that allows you to describe vector graphics using XML. A major selling point of vector graphics in general is that, unlike bitmap images (such as GIF, JPEG, PNG, and TIFF), vector images preserve their quality even as you blow them up or shrink them down. We can use SVG to do many of the same tasks we can do with canvas, including drawing paths, shapes, text, gradients, and patterns. </p>
 
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="25" fill="red"/>
     </svg>
 
+<h3>Drag and Drop</h3>
+    <p>There are several steps to adding drag and drop to your page:
+        <ol>
 
+    <li>Set the draggable attribute on any HTML elements you’d like to be draggable.</li>
 
+    <li>Add an event listener for the dragstart event on any draggable HTML elements.</li>
 
+    <li>Add an event listener for the dragover and drop events on any elements that you want to have accept dropped items.</li></ol></p>
 
+<p>Important: draggable is not Boolean!<br>
+    Note that draggable is not a Boolean attribute, so you have to explicitly set it to true </p>
 
+            <h3>The DataTransfer Object</h3>
+        <p>DataTransfer objects are one type of object outlined in the Drag and Drop API. These objects allow us to set and get data about the elements that are being dragged. Specifically, DataTransfer lets us define two pieces of information:
+<ul>
+           <li> the type of data we’re saving of the draggable element</li>
 
-
+    <li>the value of the data itself</li></ul></p>
 
 
 
@@ -97,8 +109,7 @@
     <h4><a  href="index.html">Link to Home Page</a></h4>
     <h3>	&copy; 2020 Kellie Shepherd - WDD-330</h3>
 </footer>
-<script src="week8js/modernizer.js"></script>
-<script src="week8js/raphael-min.js"></script>
+
 <script src="week8js/week8.js"></script>
 </body>
 
