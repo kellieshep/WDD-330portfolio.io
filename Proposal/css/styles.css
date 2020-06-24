@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Bevan&family=Roboto&display=swap');
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+h1, h2, h3, h4, h5 {
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Bevan', serif;
+}
+
+main {
+    width:100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+button {
+    background-color: white;
+    color: black;
+    text-transform: uppercase;
+    font-size: .9em;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-family: 'Bevan', serif;
+    cursor: pointer;
+    text-align: center;
+    padding: 1em;
+    bottom: 5em;
+    right: 10em;
+    position: absolute;
+}
+
+.backbutton {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 1em;
+}
+.mainlist li {
+    padding: 0 .5em;
+    border-bottom: 1px solid white;
+    line-height: 2em;
+    text-align: left;
+}
+.full-detail li{
+    border:none;
+}
+
+.hide {
+    display: none;
+}
+.show {
+    display:block;
+}
+.active {
+    color:#2ec4b6;
+}
+.planet {
+    width:7em;
+    height: 7em;
+}
+#planet1 {
+    width: 15em;
+    height: 15em;
+    position:absolute;
+    top: 8em;
+    right: 10em;
+}
+#planet2 {
+    position:absolute;
+    top: 12em;
+    left: 15em;
+}
+#planet3 {
+    position:absolute;
+    bottom: 10em;
+    right: 10em;
+}
+#planet4 {
+    width: 10em;
+    height: 10em;
+    position:absolute;
+    bottom: 3em;
+    left: 10em;
+}
