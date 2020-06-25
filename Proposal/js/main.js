@@ -1,7 +1,9 @@
 
-import podList from "./Picture";
+import nasaPod from "./Picture.js";
+console.log("main");
 //on load, grab the array and insert it into the page
-const nasaPod = new podList('date', 'picture');
+const nasaPics = new nasaPod('pod', 'picture');
 window.addEventListener('load', () => {
-    nasaPod.init();
+    nasaPics.init();
+    console.log("main.js");
 });

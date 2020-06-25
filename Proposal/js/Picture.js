@@ -1,3 +1,4 @@
+
 function writeToLS(key, data) {
     window.localStorage.setItem(key, JSON.stringify(data));
 }
@@ -8,32 +9,32 @@ function readFromLS(key) {
 if (typeof (localStorage.podList) !== "undefined" && localStorage.podList != "") {
     toDo = JSON.parse(localStorage.podList);
     console.log(podList);
+}
 let podList = [];
 const pod_url = 'https://api.nasa.gov/planetary/apod?api_key=ok2IRhg9AT416LyHuhfKyBbMl67iUr6geZp37adx';
-
 export default class nasaPod {
 
-    constructor(elementID, category){
+    constructor(elementID){
         console.log('your in');
         this.key = elementID;
         this.parentElement = document.getElementById(elementID);
         this.backButton = this.buildBackButton();
-        this.category = category;
-        this.url = `${pod_url}${category}/?page=`;
+
+        this.url = `${pod_url}`;
     }
 
 
     init(){
         console.log(`initializing data`);
-        fetch(`${this.url}${thisPage}`)
+        fetch(`${pod_url}`)
             .then(response => response.json())
             .then(data => {
                 writeToLS(this.key, data);
                 podList = [];
-                data.results.forEach(element =>  {
+                data.forEach(element =>  {
                     podList.push(newPicture(element));
                 })
-                this.showFullList();
+                this.showOneItem();
             });
     }
     showFullList(){
@@ -66,40 +67,38 @@ export default class nasaPod {
     getItemByName(itemName) {
         return podList.find(item => item.name === itemName);
     }
-    showOneItem(itemName){
+    showOneItem(itemName) {
         console.log(`showOneItem: ${itemName}`);
         const item = this.getItemByName(itemName);
         //this.parentElement.appendChild(renderOneItemFull(item));
         //clear the parent element and build a back button
         this.parentElement.innerHTML = '';
 
-        const li = document.createElement('div');
+        const div = document.createElement('div');
         div.classList.add('pod');
         div.innerHTML = `<h3>${item.date}</h3>
-                         <h2>${item:title}</h2>
-                         <img>${item.url}</img>
-                         <p>${item.explanation}</p>
-            }
+                         <h2>${item.title}</h2>
+                         <img src={${item.url}}></img>
+                         <p>${item.explanation}</p>`
+            
                    this.backButton.classList.remove('hide');
-        document.getElementById('pages').classList.add('hide');
-    }
+        document.getElementById('date').classList.add('hide');
+        }
+    
     
 
-        const listArr = Array.from(document.getElementById('pages').children);
+   /*     const listArr = Array.from(document.getElementById('date').children);
         console.log(listArr);
         listArr.forEach(item => {
             item.onclick = (event) => {
                 } 
                 }
-                }
-                }
-            }
-        })
-        document.getElementById('pages').classList.remove('hide');
-    }
+        )
+        document.getElementById('date').classList.remove('hide');
+    }*/
     buildBackButton(){
         const backButton = document.createElement("button");
-        backButton.textContent = "Return to List";
+        backButton.textContent = "Past Images";
         backButton.onclick = () => {this.showFullList();};
         backButton.classList.add('back-button');
         this.parentElement.after(backButton);
@@ -113,6 +112,6 @@ function newPicture(picture){
          title: picture.title,
         url: picture.url,
         explanation : picture.explanation
-    }
+    };
     return newPicture;
 }
