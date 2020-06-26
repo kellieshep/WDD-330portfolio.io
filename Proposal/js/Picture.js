@@ -31,10 +31,11 @@ export default class nasaPod {
             .then(data => {
                 writeToLS(this.key, data);
                 podList = [];
-                data.forEach(element =>  {
-                    podList.push(newPicture(element));
-                })
-                this.showOneItem();
+                console.log(data);
+                podList.push(newPicture(data));
+
+                console.log(podList);
+                this.showOneItem(data.date);
             });
     }
     showFullList(){
@@ -47,7 +48,7 @@ export default class nasaPod {
 
         podList.forEach(element => {
             const li = document.createElement('li');
-            li.innerHTML = `${element.name}`;
+            li.innerHTML = `${element.date}`;
             container.appendChild(li);
         })
         this.backButton.classList.add('hide');
@@ -59,43 +60,35 @@ export default class nasaPod {
         const listArr = Array.from(this.parentElement.children);
         console.log(listArr);
         listArr.forEach(item => {
-            item.addEventListener('click', event => {
+            item.addEventListener('load', event => {
                 this.showOneItem(event.currentTarget.innerText);
             })
         })
     }
-    getItemByName(itemName) {
-        return podList.find(item => item.name === itemName);
+    getItemByDate(item, podList) {
+        return podList.find(item => item.date === data.date);
     }
-    showOneItem(itemName) {
-        console.log(`showOneItem: ${itemName}`);
-        const item = this.getItemByName(itemName);
+    showOneItem(data) {
+        console.log('showOneItem:' + data.date);
+        const item = this.getItemByDate(data.date);
         //this.parentElement.appendChild(renderOneItemFull(item));
         //clear the parent element and build a back button
-        this.parentElement.innerHTML = '';
+        //this.parentElement.innerHTML = '';
 
         const div = document.createElement('div');
-        div.classList.add('pod');
+        div.classList.add('full-detail');
         div.innerHTML = `<h3>${item.date}</h3>
                          <h2>${item.title}</h2>
-                         <img src={${item.url}}></img>
+                         <img src='{${item.url}'}></img>
                          <p>${item.explanation}</p>`
             
                    this.backButton.classList.remove('hide');
-        document.getElementById('date').classList.add('hide');
+       // document.getElementById('date').classList.add('hide');
         }
     
     
 
-   /*     const listArr = Array.from(document.getElementById('date').children);
-        console.log(listArr);
-        listArr.forEach(item => {
-            item.onclick = (event) => {
-                } 
-                }
-        )
-        document.getElementById('date').classList.remove('hide');
-    }*/
+
     buildBackButton(){
         const backButton = document.createElement("button");
         backButton.textContent = "Past Images";
