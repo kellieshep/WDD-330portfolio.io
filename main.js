@@ -45,7 +45,7 @@ function validateInline() {
         error.style.display = 'block';
     } else {
         error.style.display = 'none';}}
-response: document.querySelector('#response')
+document.querySelector('#response')
 function disableSubmit(event) {
     if(event.target.value === ''){
         document.getElementById('submit').disabled = true;
