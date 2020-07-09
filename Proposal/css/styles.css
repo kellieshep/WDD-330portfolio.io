@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bevan&family=Roboto&display=swap');
 
 body {
+   background-image: url("../images/nightsky3.jpg");
+
     background-color: black;
     color: white;
     font-family: 'Roboto', sans-serif;
     text-align: center;
    /* box-sizing: border-box;*/
 }
+
 #heading {
     color: white;
     text-align: center;
@@ -14,33 +17,42 @@ body {
     font-family: 'Bevan', serif;
     font-size: 1.75em;
 }
-/*@media screen and (max-width: 800px){
+@media screen and (max-width: 800px){
 #planet1, #planet2, #planet3, #planet4{
     display:none;
 }
  #info{
-     max-width: 800px;
-     min-width: 320px;
+margin: 0 15px 0 15px;
  }
 #pod {
-    box-sizing: border-box;
-    width: auto;
+
 }
 button{
  font-size: 1em;
 }
-
-}*/
+    .full-detail img {
+        max-width: 100%;
+    }
+   .hide{
+       display: none;
+   }
+.full-detail p {
+    overflow-wrap: break-word;
+}
+}
+@media screen and (min-width: 850px){
 main {
-    width:100%;
+    width: 100%;
     max-width: 500px;
     margin: 0 auto;
 }
+
 section {
 
     height: 75%;
-position: absolute;
-    margin-left: -9em;
+    position: absolute;
+    margin-left: -4em;
+
     font-size: 1.5em;
 
 }
@@ -64,75 +76,94 @@ button {
 .backbutton {
     text-align: center;
 }
-#pastList{
-    right: 20em;
+
+#pastList {
+    /* right: 20em;*/
 }
+
 ul {
     list-style-type: none;
 
 
 }
+
 li {
     padding: 0 .5em;
     background-color: #011627;
     line-height: 2em;
     text-align: left;
-    margin-left: 5em;
+
     width: 30em;
     margin-top: 1em;
 }
-.full-detail li{
-    border:none;
+
+.full-detail li {
+    border: none;
 
 }
 
 .hide {
     display: none;
 }
+
 .show {
-    display:block;
+    display: block;
 }
+
 .active {
-    color:#2ec4b6;
+    color: #2ec4b6;
 }
+
 .planet {
-    width:7em;
+    width: 7em;
     height: 7em;
 }
+
 #planet1 {
     width: 15em;
     height: 15em;
-    position:absolute;
+    position: absolute;
     top: 8em;
-    right: 1em;
+    right: 5em;
 }
+
 #planet2 {
-    position:absolute;
-    top: 12em;
-    left: 5em;
+    position: absolute;
+    top: 14em;
+    left: 9em;
 }
+
 #planet3 {
-    position:absolute;
-    bottom: 10em;
-    right: 1em;
+    position: absolute;
+    bottom: 1em;
+    right: 12em;
 }
+
 #planet4 {
     width: 10em;
     height: 10em;
-    position:absolute;
+    position: absolute;
     bottom: 3em;
-    left: 1em;
+    left: 13em;
 }
+
 .full-detail {
-display: grid;
+    display: grid;
     grid-row: 25;
     grid-column: 5;
     width: content-box;
-   /* background-size: contain;*/
+    /* background-size: contain;*/
 
 }
+
 #pod {
 
     width: 65%;
     left: 25em;
+}
+
+.full-detail img {
+    max-width: 100%;
+}
+
 }
