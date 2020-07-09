@@ -2,7 +2,7 @@
 
 body {
    background-image: url("../images/nightsky3.jpg");
-
+    box-shadow: 0 0 8px 8px black inset;
     background-color: black;
     color: white;
     font-family: 'Roboto', sans-serif;
