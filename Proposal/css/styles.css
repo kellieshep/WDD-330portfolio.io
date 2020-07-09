@@ -5,7 +5,7 @@ body {
     color: white;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-
+   /* box-sizing: border-box;*/
 }
 #heading {
     color: white;
@@ -14,7 +14,23 @@ body {
     font-family: 'Bevan', serif;
     font-size: 1.75em;
 }
+/*@media screen and (max-width: 800px){
+#planet1, #planet2, #planet3, #planet4{
+    display:none;
+}
+ #info{
+     max-width: 800px;
+     min-width: 320px;
+ }
+#pod {
+    box-sizing: border-box;
+    width: auto;
+}
+button{
+ font-size: 1em;
+}
 
+}*/
 main {
     width:100%;
     max-width: 500px;
@@ -24,7 +40,7 @@ section {
 
     height: 75%;
 position: absolute;
-    margin-left: -11em;
+    margin-left: -9em;
     font-size: 1.5em;
 
 }
@@ -53,18 +69,21 @@ button {
 }
 ul {
     list-style-type: none;
-    padding: 0;
-    margin-left: 10em;
+
+
 }
 li {
     padding: 0 .5em;
     background-color: #011627;
     line-height: 2em;
-    text-align: center;
-
+    text-align: left;
+    margin-left: 5em;
+    width: 30em;
+    margin-top: 1em;
 }
 .full-detail li{
     border:none;
+
 }
 
 .hide {
@@ -108,6 +127,8 @@ li {
 display: grid;
     grid-row: 25;
     grid-column: 5;
+    width: content-box;
+   /* background-size: contain;*/
 
 }
 #pod {

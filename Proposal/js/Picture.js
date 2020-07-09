@@ -1,15 +1,25 @@
+//window.localStorage.setItem('podList', []);
 writeToLS();
-let pod = [];
+//let pod = [];
 let podList = [];
+let podArray = [];
+podArray = readFromLS('podList');
 function writeToLS(key, data) {
     window.localStorage.setItem(key, JSON.stringify(data));
-
+ console.log(localStorage.pod);
 
 }
 
 function readFromLS(key) {
-    console.log('readFromLS initialized');
-    return JSON.parse(window.localStorage.getItem(key));
+    console.log('readFromLS initialized - - ' + key);
+    let ls = window.localStorage.getItem('podList');
+    if(ls.length > 0){
+        return JSON.parse(window.localStorage.getItem('podList'));
+    } else {
+        return [];
+    }
+    
+
 }
 if (typeof (localStorage.podList) !== "undefined" && localStorage.podList != "") {
     podList = JSON.parse(localStorage.podList);
@@ -17,11 +27,10 @@ if (typeof (localStorage.podList) !== "undefined" && localStorage.podList != "")
     for (let i = 0; i < countStop; i++) {
         let item = podList[i];
         pastPics(item.date, item.title, item.media_type, item.url, item.copyright, item.explanation);
-        console.log(pod)
+        console.log(localStorage.podList);
     }
 
-
-    localStorage.podList = [];
+   // localStorage.podList = [];
 
 }
 
@@ -43,20 +52,32 @@ export default class NasaPod {
         fetch(`${pod_url}`)
             .then(response => response.json())
             .then(data => {
-                if (data !== podList [podList.length]){
-                    pod.push(data);
-                    console.log(pod);
-                    podList.push(newPicture(data));
+                //console.log(podList[podList.length - 1].date);
+                //console.log(data.date);
+                if(podList.length > 0){
+                    if (data.date !== podList[podList.length - 1].date){
+                        console.log(podList[podList.length]);
+                       // pod.push(pastPics(data));
+                        console.log(pod);
+                        podList.push(newPicture(data));
+                        podArray.push(data);
+                    }
                 }
+                else{
+                    podArray.push(data);
+                }
+            
+            
+//
 
-                writeToLS('podList', pod);
+                writeToLS('podList', podArray);
+                
+              //  console.log(podArray);
 
                 console.log(data);
 
-
-
-                console.log(podList);
-                this.showOneItem(data, data.date);
+                //console.log(podList);
+                this.showOneItem(data.date);
             });
     }
 
@@ -70,9 +91,11 @@ export default class NasaPod {
 
         podList.forEach(element => {
             const li = document.createElement('li');
+            li.setAttribute('data-date',element.date);
             li.innerHTML = `${element.date} - ${element.title}`;
 
             container.appendChild(li);
+
         })
         this.backButton.classList.add('hide');
         this.addListeners();
@@ -87,19 +110,24 @@ export default class NasaPod {
 
         listArr.forEach(item => {
             item.addEventListener('click', event => {
-                this.showPastItem(event.currentTarget.innerText);
+                console.log(event.currentTarget.getAttribute('data-date'));
+               // this.showPastItem(event.currentTarget.innerText);
+                let listItem = this.getItemByDate(event.currentTarget.getAttribute('data-date'));
+                this.showOneItem(listItem.date);
+
             })
         })
     }
 
-    getItemByDate(data, date) {
-
-        return podList.find(item => item.date === data.date);
+    getItemByDate(date) {
+        console.log(podList);
+        return podList.find(item => item.date === date);
     }
 
     showOneItem(data, date) {
-
+        console.log(data);
         const item = this.getItemByDate(data, date);
+        console.log(item);
         const picturediv = document.createElement('div');
         picturediv.classList.add('full-detail');
         if (item.media_type === "image") {
@@ -121,46 +149,16 @@ export default class NasaPod {
                              <p>${item.explanation}</p>`
 
         }
-
-            this.backButton.classList.remove('hide')
-            document.getElementById('pod').appendChild(picturediv);
-
-    }
-
-    getPastItemByDate(pod, date) {
-
-        return pod.find(item => item.date === pod.date);
-        console.log('getpastitem', pod);
-    }
-    showPastItem(pod, date) {
-
-        const item = this.getPastItemByDate(pod, date);
-        const picturediv = document.createElement('div');
-        picturediv.classList.add('full-detail');
-        if (item.media_type === "image") {
-
-            picturediv.innerHTML = `<h4>${item.date}</h4>
-                         <h3>${item.title}</h3>
-                         <img src=${item.url}>
-                         <h5>Source: ${item.copyright}</h5>
-                         <p>${item.explanation}</p>`
-
-        }
-
-        if (item.media_type === "video") {
-
-            picturediv.innerHTML = `<h4>${item.date}</h4>
-                             <h3>${item.title}</h3>
-                             <video src=${item.url}>
-                             <h5>Source: ${item.copyright}</h5>
-                             <p>${item.explanation}</p>`
-
-        }
-
-        this.backButton.classList.remove('hide')
+        if (podArray.length == 1) {this.backButton.classList.add('hide')}
+        else{this.backButton.classList.remove('hide')}
         document.getElementById('pod').appendChild(picturediv);
 
+        let els = document.getElementsByTagName("li");
+        for(let i = 0, all = els.length; i < all; i++){
+            els[i].classList.add('hide');
+        }
     }
+
     buildBackButton() {
         const backButton = document.createElement("button");
         backButton.textContent = "Past Images";
