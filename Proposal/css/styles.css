@@ -2,7 +2,7 @@
 
 body {
    background-image: url("../images/nightsky3.jpg");
-    box-shadow: 0 0 8px 8px black inset;
+
     background-color: black;
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -16,8 +16,9 @@ body {
     text-transform: uppercase;
     font-family: 'Bevan', serif;
     font-size: 1.75em;
+    box-shadow: 0 0 8px 8px black inset;
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1345px){
 #planet1, #planet2, #planet3, #planet4{
     display:none;
 }
@@ -28,6 +29,7 @@ margin: 0 15px 0 15px;
 
 }
 button{
+
  font-size: 1em;
 }
     .full-detail img {
@@ -40,7 +42,7 @@ button{
     overflow-wrap: break-word;
 }
 }
-@media screen and (min-width: 850px){
+@media screen and (min-width: 1350px){
 main {
     width: 100%;
     max-width: 500px;
