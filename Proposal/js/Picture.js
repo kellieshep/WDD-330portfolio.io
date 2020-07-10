@@ -144,7 +144,7 @@ export default class NasaPod {
 
                 picturediv.innerHTML = `<h4>${item.date}</h4>
                              <h3>${item.title}</h3>
-                             <video src=${item.url}>
+                             <iframe src=${item.url}>
                              <h5>Source: ${item.copyright}</h5>
                              <p>${item.explanation}</p>`
 
