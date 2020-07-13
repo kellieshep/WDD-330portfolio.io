@@ -8,6 +8,7 @@ body {
     font-family: 'Roboto', sans-serif;
     text-align: center;
    /* box-sizing: border-box;*/
+    overflow: auto;
 }
 
 #heading {
@@ -32,7 +33,7 @@ button{
 
  font-size: 1em;
 }
-    .full-detail img, .full-detail iframe {
+    .full-detail img {
         max-width: 100%;
     }
    .hide{
@@ -162,8 +163,16 @@ li {
     left: 25em;
 }
 
-.full-detail img, .full-detail iframe {
+.full-detail img{
     max-width: 100%;
 }
+.full-detail iframe{
 
+    margin-top: 2em;
+    margin-bottom: 10em;
+    height: 100%;
+    width: 100%;
+    border: none;
+
+}
 }

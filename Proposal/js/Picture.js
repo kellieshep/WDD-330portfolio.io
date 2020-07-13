@@ -134,7 +134,7 @@ export default class NasaPod {
 
             picturediv.innerHTML = `<h4>${item.date}</h4>
                          <h3>${item.title}</h3>
-                         <img src=${item.url}>
+                         <img src=${item.url} alt="${item.title}">
                          <h5>Source: ${item.copyright}</h5>
                          <p>${item.explanation}</p>`
 
@@ -144,9 +144,11 @@ export default class NasaPod {
 
                 picturediv.innerHTML = `<h4>${item.date}</h4>
                              <h3>${item.title}</h3>
-                             <iframe src=${item.url}>
                              <h5>Source: ${item.copyright}</h5>
-                             <p>${item.explanation}</p>`
+                             <p>${item.explanation}</p>
+                             <iframe src=${item.url} allowfullscreen>
+                             `
+                           
 
         }
         if (podArray.length == 1) {this.backButton.classList.add('hide')}
